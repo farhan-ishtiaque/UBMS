@@ -6,9 +6,15 @@
     font-family: 'Arial', sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     line-height: 1.6;
     color: #333;
+    padding-top: 80px; /* Offset for fixed header */
+    background-color: #f9f9f9;
 }
 
 .container {
@@ -35,7 +41,20 @@ header .container {
     align-items: center;
 }
 
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-logo {
+    height: 40px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
 .logo {
+    margin: 0;
     font-size: 24px;
     font-weight: bold;
     color: #2c3e50;
@@ -61,14 +80,33 @@ nav ul li a:hover {
     color: #3498db;
 }
 
+nav ul li a:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 4px;
+}
+
 /* Hero section styles */
 .hero {
-    height: 100vh;
+    min-height: calc(100vh - 80px);
     display: flex;
     align-items: center;
-    background-color: #f9f9f9;
     text-align: center;
-    padding-top: 80px; /* To account for fixed header */
+    background-color: #f9f9f9;
+}
+
+.hero .container {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .hero h1 {
@@ -97,11 +135,20 @@ nav ul li a:hover {
     border-radius: 5px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .cta-button:hover {
     background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.cta-button:focus {
+    outline: 2px solid #2980b9;
+    outline-offset: 2px;
 }
 
 /* Footer styles */
@@ -119,23 +166,43 @@ footer p {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+    body {
+        padding-top: 100px;
+    }
+
     header .container {
         flex-direction: column;
+        gap: 10px;
     }
-    
+
     nav ul {
-        margin-top: 15px;
+        margin-top: 10px;
+        flex-direction: column;
+        gap: 10px;
     }
-    
+
     nav ul li {
-        margin-left: 15px;
+        margin-left: 0;
     }
-    
+
     .hero h1 {
         font-size: 2rem;
     }
-    
+
     .hero h2 {
         font-size: 1.5rem;
     }
+
+    .header-logo {
+        height: 30px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+}
+
+/* Logo hover */
+.logo-container:hover .header-logo {
+    transform: scale(1.05);
 }
