@@ -11,12 +11,26 @@ return new class extends Migration
      */
     public function up(): void
     {
+        
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('FirstName');
+            $table->string('LastName');
+            $table->string('PhoneNumber');
             $table->string('email')->unique();
             $table->string('password');
-            $table->timestamps();
+            
+            // Role system (ENUM for simplicity)
+            $table->enum('type', ['umsb_personnel', 'university_admin'])
+                  ->default('umsb_personnel');
+            
+            /*// Nullable foreign key since not all users belong to universities
+            $table->foreignId('university_id')
+                  ->nullable()
+                  ->constrained()
+                  ->onDelete('set null');
+            
+            $table->timestamps();*/
         });
     }
 
