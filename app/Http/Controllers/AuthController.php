@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,46 +18,30 @@ class AuthController extends Controller
         return view('registration');
     }
 
-    /*function loginPost(Request $request)
-    {
-        //echo "Login Post";
-        // Validate the request data
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6',
-        ]);
-        
+    public function loginPost(Request $request)
+{
+    /*$user = \App\Models\User::where('email', $request->email)->first();
+    dd($user);*/
 
-       
-        
-        // Attempt to log the user in
-        if (auth()->attempt($request->only('email', 'password'))) {
-            // Redirect to the intended page or dashboard
-            return redirect()->intended('homepage')->with('success', 'Login successful');
-        }
+    // Validate the request data
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required|min:6',
+    ]);
 
-        // If authentication fails, redirect back with an error message
-        return redirect()->back()->withErrors(['email' => 'Invalid credentials'])->withInput();
-    }*/
-
-    function loginPost(Request $request) {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6',
-        ]);
-    
-        // Find admin by email (without hashing check)
-        $admin = Admin::where('email', $request->email)->first();
-    
-        // Compare plain-text passwords (INSECURE - for debugging only)
-        if ($admin && $request->password === $admin->password) {
-            // Manually log in the user (still uses hashing for session)
-            Auth::guard('admin')->login($admin);
-            return redirect()->route('homepage');
-        }
-    
-        return back()->withErrors(['email' => 'Invalid credentials']);
+    if (auth()->attempt($request->only('email', 'password'))) {
+        return redirect()->intended('homepage')->with('success', 'Login successful');
     }
+
+    return redirect()->back()
+        ->withErrors(['email' => 'Invalid credentials'])
+        ->withInput();
+}
+
+
+
+
+    
 
     function registrationPost(Request $request)
     {
