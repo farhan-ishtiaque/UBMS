@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             
             // Role system (ENUM for simplicity)
-            $table->enum('type', ['umsb_personnel', 'university_admin'])
+            $table->enum('type', ['umsb_personnel', 'university_admin','moderators'])
                   ->default('umsb_personnel');
             
             /*// Nullable foreign key since not all users belong to universities

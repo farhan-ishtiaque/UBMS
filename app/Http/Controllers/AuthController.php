@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\UniversityAdmin;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -13,55 +15,74 @@ class AuthController extends Controller
         return view('login');
     }
 
-    function registration()
-    {
-        return view('registration');
-    }
-
-    public function loginPost(Request $request)
+    public function registration()
 {
-    /*$user = \App\Models\User::where('email', $request->email)->first();
-    dd($user);*/
-
-    // Validate the request data
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required|min:6',
-    ]);
-
-    if (auth()->attempt($request->only('email', 'password'))) {
-        return redirect()->intended('homepage')->with('success', 'Login successful');
-    }
-
-    return redirect()->back()
-        ->withErrors(['email' => 'Invalid credentials'])
-        ->withInput();
+    $universities = \App\Models\University::all(); // assuming you have a University model
+    return view('registration', compact('universities'));
 }
 
 
-
-
-    
-
-    function registrationPost(Request $request)
+    public function loginPost(Request $request)
     {
-        // Validate the request data
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed',
+            'email' => 'required|email',
+            'password' => 'required|min:6',
         ]);
 
-        // Create a new user
-        $user = new User();
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = bcrypt($request->input('password'));
-        $user->save();
+        if (auth()->attempt($request->only('email', 'password'))) {
+            return redirect()->intended('homepage')->with('success', 'Login successful');
+        }
 
-        // Redirect to the login page with a success message
-        return redirect()->route('login')->with('success', 'Registration successful. Please log in.');
+        return redirect()->back()
+            ->withErrors(['email' => 'Invalid credentials'])
+            ->withInput();
     }
+
+    public function registrationPost(Request $request)
+    {
+        if ($request->has('FirstName') && $request->has('LastName')) {
+            // Manual Registration
+            $request->validate([
+                'FirstName' => 'required|string|max:255',
+                'LastName' => 'required|string|max:255',
+                'PhoneNumber' => 'required|string|max:15',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|min:6|confirmed',
+            ]);
+
+            $user = new User();
+            $user->FirstName = $request->input('FirstName');
+            $user->LastName = $request->input('LastName');
+            $user->email = $request->input('email');
+            $user->password = bcrypt($request->input('password'));
+            $user->type = 'umsb_personnel';
+            $user->phoneNumber = $request->input('PhoneNumber');
+            $user->save();
+
+            return redirect()->route('homepage')->with('success', 'Registration successful. Please log in.');
+        } elseif ($request->has('university') && $request->has('uniAdmin')) {
+            // University Registration
+            $universityAdmin = UniversityAdmin::find($request->input('uniAdmin'));
+
+            if (!$universityAdmin) {
+                return redirect()->back()->withErrors(['uniAdmin' => 'Selected university admin not found.']);
+            }
+
+            $user = new User();
+            $user->FirstName = $universityAdmin->first_name;
+            $user->LastName = $universityAdmin->last_name;
+            $user->email = $universityAdmin->email;
+            $user->password = bcrypt('password');
+            $user->type = 'university_admin';
+            $user->PhoneNumber = $universityAdmin->phone_number;
+            $user->save();
+
+            return redirect()->route('login')->with('success', 'Registration successful. Please log in.');
+        }
+
+        return redirect()->back()->withErrors(['registration' => 'Invalid registration data.']);
+    }
+
     function logout()
     {
         auth()->logout();

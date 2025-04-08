@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'PhoneNumber' => '1234567890',
             'email' => 'moderator1@example.com', // Use valid email format
             'password' => Hash::make('admin123'),
-            'type' => 'university_admin', // Add role if needed
+            'type' => 'moderators', // Add role if needed
         ],
         [
             'FirstName' => 'Asfiya',
@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'PhoneNumber' => '9876543210',
             'email' => 'moderator2@example.com',
             'password' => Hash::make('admin123'),
-            'type' => 'university_admin',
+            'type' => 'moderators',
         ],
     ];
 
