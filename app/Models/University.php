@@ -6,17 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class University extends Model
 {
-    protected $table = 'universities'; // Specify the table name
     protected $fillable = [
         'uni_name',
-        'uni_type',
-        'established_year',
-        'portal_code',
-        'accreditation_status',
         'district',
         'area',
-        'website_url',
         'email_address',
         'phone_number',
-    ]; // Specify fillable fields
+        'accreditation_status',
+        'uni_type',
+        'established_year',
+        'postal_code',
+        'website_url'
+    ];
+
+    public function scopeAccredited($query)
+    {
+        return $query->where('accreditation_status', 'accredited');
+    }
 }

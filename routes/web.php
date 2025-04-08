@@ -25,4 +25,4 @@ Route::post('/universities/store', [UniversityController::class, 'store'])->name
 
 
 
-Route::get('/universities/accredited', [UniversityController::class, 'showAccredited'])->name('universities.accredited');
+Route::get('/universities/accredited', [UniversityController::class, 'showAccredited'])->name('universities');
