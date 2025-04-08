@@ -1,28 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AuthController;
 
 // Homepage Route
 Route::get('/', function () {
     return view('homepage');
 })->name('homepage');
 
-// About Page Route (using controller)
-Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route ::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'loginPost'])->name('login.post');
 
-// Authentication Routes
-Route::get('/login', function () {
-    return view('auth.login'); // Recommended to put auth views in auth folder
-})->name('login');
-
-Route::get('/registration', function () {
-    return view('auth.registration');
-})->name('registration');
-use App\Http\Controllers\UniversityController;
-
-Route::post('/universities/store', [UniversityController::class, 'store'])->name('universities.store');
-
+Route::get('registration', [AuthController::class, 'registration'])->name('registration');
 
 
 Route::get('/universities/accredited', [UniversityController::class, 'showAccredited'])->name('universities.accredited');

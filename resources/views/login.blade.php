@@ -16,7 +16,7 @@
                 <img src="{{ asset('images/login image.png') }}" class="img-fluid" alt="Login illustration">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('login.post') }}">
                     @csrf
 
                     <div class="form-outline mb-4">
@@ -32,18 +32,13 @@
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <div class="form-check">
-                            <input class="form-check-input me-2" type="checkbox" name="remember" id="remember" />
-                            <label class="form-check-label" for="remember"> Remember me </label>
-                        </div>
+                       
                         <a href="#" class="text-body">Forgot password?</a>
                     </div>
 
                     <div class="text-center text-lg-start mt-4 pt-2">
                         <button type="submit" class="btn btn-primary btn-lg px-5">Login</button>
-                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
-                            <a href="#" class="link-danger">Register</a>
-                        </p>
+                        
                     </div>
                 </form>
             </div>

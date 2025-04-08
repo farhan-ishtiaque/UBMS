@@ -71,7 +71,7 @@
 
                             </div>
                             <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-                                <img src="{{ asset('images/register-image.png') }}" class="img-fluid" alt="Registration illustration">
+                                <img src="{{ asset('images/Registration.jpg') }}" class="img-fluid" alt="Registration illustration">
                             </div>
                         </div>
                     </div>
