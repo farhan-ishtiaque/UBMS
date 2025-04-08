@@ -19,3 +19,10 @@ Route::get('/login', function () {
 Route::get('/registration', function () {
     return view('auth.registration');
 })->name('registration');
+use App\Http\Controllers\UniversityController;
+
+Route::post('/universities/store', [UniversityController::class, 'store'])->name('universities.store');
+
+
+
+Route::get('/universities/accredited', [UniversityController::class, 'showAccredited'])->name('universities.accredited');

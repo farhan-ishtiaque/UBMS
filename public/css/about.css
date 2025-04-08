@@ -7,18 +7,68 @@ body {
     margin: 0;
     padding: 0;
 }
-tr[onclick]:hover {
-    background-color: #f5f5f5;
-    text-decoration: underline;
-}
 
 .ubms-container {
     max-width: 1000px;
     margin: 30px auto;
-    padding: 30px;
+    padding: 40px;
     background-color: #fff;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+}
+
+/* Enhanced Header Section */
+.header-section {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(0, 106, 78, 0.15);
+    background: linear-gradient(135deg, rgba(245, 255, 252, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #006a4e;
+    margin-bottom: 15px;
+    line-height: 1.2;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px;
+}
+
+h1 span {
+    color: #f42a41;
+    font-style: italic;
+}
+
+h2 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #444;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+.ubms-intro {
+    font-size: 1.15rem;
+    color: #555;
+    margin: 0 auto 30px;
+    line-height: 1.8;
+    max-width: 800px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-left: 4px solid #f42a41;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Rest of your existing CSS */
+tr[onclick]:hover {
+    background-color: #f5f5f5;
+    text-decoration: underline;
 }
 
 .ubms-main-title {
@@ -31,13 +81,6 @@ tr[onclick]:hover {
 
 .ubms-main-title span {
     color: #f42a41;
-}
-
-.ubms-intro {
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 30px;
-    line-height: 1.8;
 }
 
 .dropdown {
@@ -149,6 +192,19 @@ tr[onclick]:hover {
     .ubms-container {
         padding: 20px;
         margin: 15px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.4rem;
+    }
+    
+    .ubms-intro {
+        font-size: 1rem;
+        padding: 15px;
     }
     
     .ubms-table {

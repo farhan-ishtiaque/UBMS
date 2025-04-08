@@ -5,14 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About UBMS Bangladesh</title>
-    <div class="header-divider"></div>
-                <p class="tagline">Digital Transformation for Academic Excellence</p>
-            </div>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/about.css') }}">
 </head>
 <body>
     <div class="ubms-container">
+       <h1>DBMS--Digital Transformation for Academic Excellence</h1>
         <h2>Comprehensive University Governance Platform</h2>
         <p class="ubms-intro">UBMS is the flagship initiative to modernize higher education administration through cutting-edge technology. This integrated web-based solution serves as the central platform for coordinating all academic operations across Bangladeshi universities.</p>
         
@@ -63,19 +61,19 @@
         <!-- Standing Committees -->
         <div class="dropdown">
             <div class="dropdown-header" onclick="toggleDropdown('committees')">
-                <span>Standing Committees</span>
+                <span>Accreditation  Criteria</span>
                 <span class="dropdown-icon">▼</span>
             </div>
             <div class="dropdown-content" id="committees-content">
                 <ul class="committee-list">
-                    <li>Finance Committee</li>
-                    <li>Selection Committee for Grade 1-10</li>
-                    <li>Selection Committee for Grade 11-20</li>
-                    <li>Committee for up-gradation and Promotion</li>
-                    <li>Tender Opening Committee</li>
-                    <li>Tender Evaluation Committee</li>
-                    <li>General Purchase Committee</li>
-                    <li>Electrical & Electronic Materials Purchase Committee</li>
+                    <li>Submission of updated course syllabi matching BNQF standards</li>
+                    <li>At least 60% full-time faculty with PhD/MPhil (documents uploaded to UBMS)</li>
+                    <li> Evidence of 5% revenue deposit in UBMS reserve fund</li>
+                    <li> Minimum 2.5 sqm space per student (campus photos + floor plans submitted)</li>
+                    <li> Syndicate/Academic Council meeting minutes (last 4 quarters)</li>
+                    <li>Minimum 5 published research papers per department (last 3 years)</li>
+                    <li>Evidence of industry collaborations (MoUs uploaded)</li>
+                    <li> Minimum 75% attendance in classes (verified via UBMS biometric data)</li>
                 </ul>
             </div>
         </div>
@@ -92,7 +90,7 @@
                     <li>Provide real-time institutional performance analytics</li>
                     <li>Automate regulatory compliance processes</li>
                     <li>Facilitate data-driven decision making</li>
-                    <li>Scholarship & Financial Aid Managemen</li>
+                    <li>Scholarship & Financial Aid Management</li>
                 </ul>
             </div>
         </div>
