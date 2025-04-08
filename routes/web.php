@@ -1,28 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\UniversityController;
+
 
 // Homepage Route
 Route::get('/', function () {
     return view('homepage');
 })->name('homepage');
 
+Route ::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'loginPost'])->name('login.post');
+
+Route::get('homepage/registration', [AuthController::class, 'registration'])->name('univeersity.registration');
+Route::post('homepage/registration', [AuthController::class, 'registrationPost'])->name('university.registration.post');
+
+
+Route::get('/universities/accredited', [UniversityController::class, 'showAccredited'])->name('universities.accredited');
+
 // About Page Route (using controller)
 Route::get('/about', [AboutController::class, 'index'])->name('about');
-
-// Authentication Routes
-Route::get('/login', function () {
-    return view('auth.login'); // Recommended to put auth views in auth folder
-})->name('login');
-
-Route::get('/registration', function () {
-    return view('auth.registration');
-})->name('registration');
-use App\Http\Controllers\UniversityController;
-
-Route::post('/universities/store', [UniversityController::class, 'store'])->name('universities.store');
-
-
-
-Route::get('/universities/accredited', [UniversityController::class, 'showAccredited'])->name('universities');

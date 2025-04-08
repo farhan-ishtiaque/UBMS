@@ -12,14 +12,16 @@ body {
     position: relative;
 }
 
-.form-outline input {
+.form-outline input,
+.form-outline select {
     padding: 10px 15px;
     border-radius: 8px;
     border: 1px solid #ddd;
     transition: all 0.3s;
 }
 
-.form-outline input:focus {
+.form-outline input:focus,
+.form-outline select:focus {
     border-color: #3498db;
     box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
 }
@@ -34,7 +36,9 @@ body {
 }
 
 .form-outline input:focus + label,
-.form-outline input:not(:placeholder-shown) + label {
+.form-outline input:not(:placeholder-shown) + label,
+.form-outline select:focus + label,
+.form-outline select:not(:placeholder-shown) + label {
     top: -10px;
     left: 10px;
     font-size: 12px;
@@ -73,7 +77,28 @@ body {
         border-radius: 15px !important;
     }
     
-    .form-outline input {
+    .form-outline input,
+    .form-outline select {
         padding: 8px 12px;
     }
+}
+
+/* Additional styles for buttons */
+.btn-outline-primary {
+    color: #3498db;
+    border-color: #3498db;
+}
+
+.btn-outline-primary:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+/* Footer styles */
+footer {
+    background-color: #3498db;
+}
+
+footer .text-white {
+    color: white !important;
 }
