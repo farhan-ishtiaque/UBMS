@@ -16,4 +16,3 @@ class UniversityController extends Controller
         return view('universities', compact('universities'));
     }
 }
-
