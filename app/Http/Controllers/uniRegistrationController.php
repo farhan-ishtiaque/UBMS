@@ -15,6 +15,7 @@ class UniRegistrationController extends Controller
 
     public function register(Request $request)
     {
+
         // Validate incoming request
         $validator = Validator::make($request->all(), [
             'universityName' => 'required|string|max:255',
@@ -30,7 +31,7 @@ class UniRegistrationController extends Controller
             'designation' => 'required|string|max:255',
             'signature' => 'required|string|max:255',
             'submissionDate' => 'required|date',
-            'acceptConditions' => 'accepted',
+            'acceptConditions' => 'accepted',  // Validates the checkbox
         ]);
 
         if ($validator->fails()) {
@@ -38,25 +39,28 @@ class UniRegistrationController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        Log::info('Validation passed, proceeding to try block.');
+
         try {
             // Map input fields to database columns
+            Log::info('Attempting to save university data.');
             $universityData = [
                 'uni_name' => $request->input('universityName'),
                 'uni_type' => $request->input('uniType'),
-                'portal_code' => $request->input('portalCode'),
+                'postal_code' => $request->input('portalCode'),
                 'established_year' => $request->input('establishedYear'),
                 'district' => $request->input('district'),
                 'area' => $request->input('area'),
                 'website_url' => $request->input('website'),
                 'email_address' => $request->input('email'),
                 'phone_number' => $request->input('contactNumber'),
-                'accreditation_status' => 'Not Accredited', // Set default to 'Not Accredited'
+                'accreditation_status' => 'Not Accredited', // Default status
             ];
 
             // Save to the universities table
             University::create($universityData);
 
-            return redirect()->route('university.registration')->with('success', 'Registration successful!');
+            return redirect()->route('homepage')->with('success', 'Registration successful!');
         } catch (\Exception $e) {
             Log::error('Registration error: ' . $e->getMessage());
             return back()->with('error', 'Registration failed. Please try again.')->withInput();

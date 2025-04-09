@@ -8,7 +8,7 @@ class University extends Model
     protected $fillable = [
         'uni_name',
         'uni_type',
-        'portal_code',
+        'postal_code',
         'established_year',
         'district',
         'area',

@@ -12,7 +12,7 @@ return new class extends Migration
             $table->string('uni_name'); // Name of the university
             $table->enum('uni_type', ['Public', 'Private']); // University Type
             $table->year('established_year'); // Year established
-            $table->string('portal_code'); // Portal code
+            $table->string('postal_code'); // Portal code
             $table->enum('accreditation_status', ['Accredited', 'Not Accredited']); // Accreditation status
             $table->string('district'); // District
             $table->string('area'); // Area
