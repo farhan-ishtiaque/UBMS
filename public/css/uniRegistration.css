@@ -1,3 +1,4 @@
+/* Background and overall page styling */
 body {
     background-image: url('/storage/image-removebg-preview.png'); /* Background image */
     background-size: cover; /* Cover the entire background */
@@ -27,6 +28,7 @@ h1 {
 
 h3 {
     color: #003366; /* Dark blue color for section headings */
+    font-size: 1.5rem; /* Font size */
 }
 
 /* Input field styles */
@@ -36,7 +38,105 @@ h3 {
     border-radius: 0.5rem; /* Rounded corners */
     border: 1px solid #003366; /* Dark blue border */
     height: 38px; /* Height of input fields */
+    padding-left: 10px; /* Padding inside input fields */
 }
 
 /* Focus state for input fields */
- 
+.form-control:focus {
+    border-color: #0056b3; /* Change border color when focused */
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.6); /* Add a light shadow */
+}
+
+/* Button styling */
+.btn-primary {
+    background-color: #003366; /* Dark blue button */
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    width: 100%; /* Full width */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Lighter blue on hover */
+    cursor: pointer;
+}
+
+/* Form Section Styling */
+h3 + .form-group {
+    margin-top: 20px; /* Add spacing between sections */
+}
+
+p {
+    font-size: 1rem; /* Set font size for paragraphs */
+    color: #003366;
+}
+
+/* Alerts for success or error messages */
+.alert {
+    font-size: 1rem; /* Font size */
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #d4edda; /* Green success message */
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da; /* Red error message */
+    color: #721c24;
+}
+
+/* File input styling */
+.form-group input[type="file"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #003366;
+    width: 90%;
+    margin-top: 10px;
+}
+
+/* Custom styling for the checkbox */
+.form-check-label {
+    font-size: 1rem;
+    color: #003366;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* Custom form group label */
+label {
+    font-size: 1rem;
+    color: #003366;
+    font-weight: bold;
+}
+
+/* Add some bottom spacing for form fields */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        width: 90%; /* Ensure container doesn't overflow on small screens */
+    }
+
+    .form-control {
+        width: 100%; /* Ensure inputs span full width */
+    }
+
+    .btn-primary {
+        padding: 10px 20px;
+    }
+}
