@@ -22,3 +22,7 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 // University Controller Routes
 Route::get('/universities/accredited', [UniversityController::class, 'showAccredited'])->name('universities.accredited');
+use App\Http\Controllers\UserController;
+
+// Route to show all users
+Route::get('/users', [UserController::class, 'showUsers'])->name('users.list');
