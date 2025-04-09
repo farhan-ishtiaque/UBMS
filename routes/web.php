@@ -1,4 +1,8 @@
 <?php
+
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ModeratorDashboardController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\UniversityController;
@@ -13,6 +17,8 @@ Route::get('/', function () {
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'loginPost'])->name('login.post');
 
+Route::get('/registration', [AuthController::class, 'registration'])->name('univeersity.registration');
+Route::post('/registration', [AuthController::class, 'registrationPost'])->name('university.registration.post');
 
 Route::get('/university-registration', [UniRegistrationController::class, 'showRegistrationForm'])->name('university.registration');
 Route::post('/university-registration', [UniRegistrationController::class, 'register'])->name('university.registration.post');
@@ -22,7 +28,8 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 // University Controller Routes
 Route::get('/universities/accredited', [UniversityController::class, 'showAccredited'])->name('universities.accredited');
-use App\Http\Controllers\UserController;
 
-// Route to show all users
-Route::get('/users', [UserController::class, 'showUsers'])->name('users.list');
+Route::get('/mod/dashboard', [ModeratorDashboardController::class, 'runDashboard'])->name('moderator.dashboard');
+
+Route::get('/dashboard-data', [ModeratorDashboardController::class, 'getDashboardData']);
+
