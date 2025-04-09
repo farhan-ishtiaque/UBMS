@@ -30,7 +30,7 @@ class AuthController extends Controller
         ]);
 
         if (auth()->attempt($request->only('email', 'password'))) {
-            return redirect()->intended('homepage')->with('success', 'Login successful');
+            return redirect()->intended(route('moderator.dashboard'))->with('success', 'Login successful');
         }
 
         return redirect()->back()

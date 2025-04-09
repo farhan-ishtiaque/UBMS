@@ -8,7 +8,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('universities', function (Blueprint $table) {
-            $table->id(); // uni_id
+            $table->id('uni_id'); // uni_id
             $table->string('uni_name'); // Name of the university
             $table->enum('uni_type', ['Public', 'Private']); // University Type
             $table->year('established_year'); // Year established
