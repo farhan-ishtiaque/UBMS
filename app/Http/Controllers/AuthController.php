@@ -16,10 +16,10 @@ class AuthController extends Controller
     }
 
     public function registration()
-{
-    $universities = \App\Models\University::all(); // assuming you have a University model
-    return view('registration', compact('universities'));
-}
+    {
+        $universities = \App\Models\University::all(); // assuming you have a University model
+        return view('registration', compact('universities'));
+    }
 
 
     public function loginPost(Request $request)
@@ -81,6 +81,15 @@ class AuthController extends Controller
         }
 
         return redirect()->back()->withErrors(['registration' => 'Invalid registration data.']);
+    }
+
+    // In your LoginController or AuthController
+    public function authenticated(Request $request, $user)
+    {
+        // Store university_id in session
+        session(['uni_id' => $user->uni_id]);
+
+        return redirect('/university-dashboard');
     }
 
     function logout()

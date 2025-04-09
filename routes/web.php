@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ModeratorDashboardController;
+use App\Http\Controllers\UniAdminDashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AboutController;
@@ -13,7 +14,7 @@ Route::get('/', function () {
     return view('homepage');
 })->name('homepage');
 
-Route ::get('login', [AuthController::class, 'login'])->name('login');
+Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'loginPost'])->name('login.post');
 
 Route::get('/registration', [AuthController::class, 'registration'])->name('univeersity.registration');
@@ -33,3 +34,19 @@ Route::get('/mod/dashboard', [ModeratorDashboardController::class, 'runDashboard
 
 // web.php
 Route::get('/dashboard-data', [ModeratorDashboardController::class, 'getDashboardData']);
+Route::get('/dashboard-data2', [UniAdminDashboardController::class, 'getDashboardData']);
+
+
+Route::middleware(['auth', 'university.admin'])->group(function () {
+    Route::get('/admin/dashboard', [UniAdminDashboardController::class, 'show'])
+    ->name('uniAdmin.dashboard');
+});
+
+
+    Route::post('/logout', function () {
+        auth()->logout();
+        session()->invalidate();
+        session()->regenerateToken();
+        return redirect(route('homepage'));
+    })->name('logout');
+    

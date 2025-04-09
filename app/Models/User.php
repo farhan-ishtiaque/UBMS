@@ -19,7 +19,7 @@ class User extends Authenticatable
         'email',
         'password',
         'type',
-        // 'university_id' - uncomment when you add this field
+        'uni_id'
     ];
 
     protected $hidden = [

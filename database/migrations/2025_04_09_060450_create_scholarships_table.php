@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('scholarships', function (Blueprint $table) {
+        Schema::create('scholarships', function (Blueprint $table) { 
             $table->id('scholarship_id'); // Primary key
-            $table->unsignedBigInteger('university_id'); // Foreign key referencing universities
+            $table->unsignedBigInteger('uni_id'); // Foreign key referencing universities
             $table->string('semester'); // Semester name
             $table->year('year'); // Year of scholarship
             $table->float('percentage'); // Percentage of aid
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamps(); // Created at and updated at
             
             // Foreign key constraint
-            $table->foreign('university_id')->references('uni_id')->on('universities')->onDelete('cascade');
+            $table->foreign('uni_id')->references('uni_id')->on('universities')->onDelete('cascade');
         });
         
     }

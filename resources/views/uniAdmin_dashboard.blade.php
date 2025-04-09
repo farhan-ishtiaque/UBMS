@@ -31,10 +31,13 @@
   <main class="main-content">
     <div class="header">
       <h1 class="page-title">Dashboard Overview</h1>
-      <div class="user-profile">
-        <img src="{{ asset('images/Moderator.png') }}" alt="User" class="user-avatar" />
-        <span class="username">Moderator</span>
-      </div>
+      <form action="{{ route('logout') }}" method="POST" class="logout-form">
+        @csrf
+        <button type="submit" class="logout-button">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </form>
+    
     </div>
 
     <div class="card-grid">
@@ -44,7 +47,7 @@
           <div class="card-icon"><i class="fas fa-building"></i></div>
           <h3 class="card-title">Total Departments</h3>
         </div>
-        <div class="card-value" id="total-departments">Loading...</div>
+        <div class="card-value" id="total-departments">{{$departments->count()}}</div>
       </div>
 
       <!-- Faculties Card -->
@@ -101,18 +104,11 @@
         <div class="card-value" id="faculty-recruitment">Loading...</div>
       </div>
 
-      <!-- University Fundings Card -->
-      <div class="card card-8">
-        <div class="card-header">
-          <div class="card-icon"><i class="fas fa-money-check-alt"></i></div>
-          <h3 class="card-title">University Fundings</h3>
-        </div>
-        <div class="card-value" id="university-fundings">Loading...</div>
-      </div>
+      
     </div>
   </main>
   
   <!-- Link to external JavaScript -->
-  <script src="{{ asset('js/dashboard.js') }}"></script>
+  <script src="{{ asset('js/admin_dashboard.js') }}"></script>
 </body>
 </html>
