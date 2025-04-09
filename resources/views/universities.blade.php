@@ -6,7 +6,7 @@
     <title>Accredited Universities</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}"> <!-- Link to your custom CSS file -->
+    <link rel="stylesheet" href="{{ asset('css/university.css') }}"> <!-- Link to your custom CSS file -->
 </head>
 <body class="bg-light">
     <div class="container mt-5">

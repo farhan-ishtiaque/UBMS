@@ -1,20 +1,16 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('universities', function (Blueprint $table) {
             $table->id('uni_id'); // uni_id
             $table->string('uni_name'); // Name of the university
-            $table->enum('uni_type', ['Public', 'Private']); // Type of university
+            $table->enum('uni_type', ['Public', 'Private']); // University Type
             $table->year('established_year'); // Year established
             $table->string('portal_code'); // Portal code
             $table->enum('accreditation_status', ['Accredited', 'Not Accredited']); // Accreditation status
@@ -32,9 +28,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('universities');
