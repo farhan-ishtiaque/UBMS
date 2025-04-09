@@ -1,0 +1,42 @@
+body {
+    background-image: url('/storage/image-removebg-preview.png'); /* Background image */
+    background-size: cover; /* Cover the entire background */
+    background-repeat: no-repeat; /* No repeat */
+    background-position: top center; /* Center the image */
+    background-color: #f0f4ff; /* Light blue background color */
+    font-family: Arial, sans-serif; /* Font family */
+}
+
+/* Container for the form */
+.container {
+    max-width: 700px; /* Maximum width of the form */
+    margin: auto; /* Center the form */
+    background-color: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px; /* Padding inside the container */
+}
+
+/* Heading styles */
+h1 {
+    font-size: 2.5rem; /* Font size for the main heading */
+    font-weight: bold; /* Bold text */
+    color: #003366; /* Dark blue color */
+    text-align: center; /* Center the text */
+}
+
+h3 {
+    color: #003366; /* Dark blue color for section headings */
+}
+
+/* Input field styles */
+.form-control {
+    width: 90%; /* Width of input fields */
+    margin: 0 auto 15px auto; /* Center the input fields with margin */
+    border-radius: 0.5rem; /* Rounded corners */
+    border: 1px solid #003366; /* Dark blue border */
+    height: 38px; /* Height of input fields */
+}
+
+/* Focus state for input fields */
+ 
