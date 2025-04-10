@@ -54,3 +54,23 @@ Route::delete('/user/{id}/delete', [UserController::class, 'deleteUser'])->name(
 // User delete page (list + search)
 Route::get('/users/delete-page', [UserController::class, 'showDeleteUsers'])->name('users.delete.page');
 Route::get('/users/delete-search', [UserController::class, 'showDeleteUsers'])->name('users.search.delete');
+use App\Http\Controllers\FacultyController;
+
+Route::get('/faculties/create', [FacultyController::class, 'create'])->name('faculties.create');
+Route::post('/faculties/store', [FacultyController::class, 'store'])->name('faculties.store');
+Route::get('/faculties', [FacultyController::class, 'showFaculties'])->name('faculties.list');
+Route::get('/facUniversities', [FacultyController::class, 'facultyUniversities'])->name('universities.list');
+Route::get('/faculties/{id}/edit', [FacultyController::class, 'editFaculty'])->name('faculties.edit');
+Route::post('/faculties/{id}/update', [FacultyController::class, 'updateFaculty'])->name('faculties.update');
+Route::get('/faculties/delete', [FacultyController::class, 'deleteFacultyPage'])->name('faculties.delete.page');
+Route::delete('/faculties/{id}/delete', [FacultyController::class, 'destroyFaculty'])->name('faculties.delete');
+Route::get('/mod/universities/update', [UniversityController::class, 'showUpdateForm'])->name('universities.update');
+Route::post('/mod/universities/{id}/update', [UniversityController::class, 'updateAccreditation'])->name('universities.update.accreditation');
+
+use App\Http\Controllers\StudentsController;
+
+Route::get('/students', [StudentsController::class, 'index'])->name('students.index');
+Route::get('/students/create', [StudentsController::class, 'create'])->name('students.create');
+Route::post('/students', [StudentsController::class, 'store'])->name('students.store');
+Route::get('/students/{student}/edit', [StudentsController::class, 'edit'])->name('students.edit');
+Route::put('/students/{student}', [StudentsController::class, 'update'])->name('students.update');

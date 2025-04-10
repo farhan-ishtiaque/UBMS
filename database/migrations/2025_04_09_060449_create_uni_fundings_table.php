@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('uni_fundings', function (Blueprint $table) {
             $table->id('funding_id');
-            $table->unsignedBigInteger('university_id');
+            $table->unsignedBigInteger('uni_id');
             $table->string('funding_source');
             $table->enum('funding_type', ['Government Funded', 'Non-Government Funded']);
             $table->float('allocation_amount');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('disbursement_date');
             $table->timestamps();
         
-            $table->foreign('university_id')->references('uni_id')->on('universities')->onDelete('cascade');
+            $table->foreign('uni_id')->references('uni_id')->on('universities')->onDelete('cascade');
         });
         
     }

@@ -10,7 +10,7 @@ class Students extends Model
 
     protected $fillable = [
         'dept_id', 'uni_id', 'first_name', 'middle_name', 'last_name',
-        'gender', 'date_of_birth', 'cgpa', 'graduation_status', 'graduation_date'
+        'gender', 'date_of_birth', 'cgpa', 'status', 'graduation_date'
     ];
 
     public function phones()

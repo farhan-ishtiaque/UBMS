@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('university_admins', function (Blueprint $table) {
             $table->id('admin_id');
-            $table->unsignedBigInteger('university_id');
+            $table->unsignedBigInteger('uni_id');
             $table->string('admin_name');
             $table->string('designation')->nullable();
             $table->enum('status', ['Active', 'Inactive']);
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('phone_number');
             $table->timestamps();
         
-            $table->foreign('university_id')->references('uni_id')->on('universities')->onDelete('cascade');
+            $table->foreign('uni_id')->references('uni_id')->on('universities')->onDelete('cascade');
         });
         
         

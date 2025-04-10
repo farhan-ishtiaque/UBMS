@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\University; // Assuming your model is named University
 use Illuminate\Support\Facades\Log;
 
-class UniRegistrationController extends Controller
+class UniversityController extends Controller
 {
     public function showRegistrationForm()
     {
@@ -16,7 +16,7 @@ class UniRegistrationController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'universityName' => 'required|string|max:255',
+            'uniName' => 'required|string|max:255',
             'location' => 'required|string|max:255',
             'website' => 'required|url',
             'email' => 'required|email',
@@ -51,4 +51,42 @@ class UniRegistrationController extends Controller
             return back()->with('error', 'Registration failed. Please try again.')->withInput();
         }
     }
+    public function showUpdateForm(Request $request)
+{
+    $universities = University::where('accreditation_status', 'Not Accredited')->get();
+    $selectedUniversityId = $request->input('universityId');
+    $university = null;
+
+    if ($selectedUniversityId) {
+        $university = University::find($selectedUniversityId);
+    }
+
+    return view('universityUpdate', [
+        'universities' => $universities,
+        'university' => $university
+    ]);
+}
+
+public function updateAccreditation(Request $request, $id)
+{
+    $request->validate([
+        'accreditation_status' => 'required|in:Accredited,Not Accredited',
+    ]);
+
+    $university = University::findOrFail($id);
+    $university->accreditation_status = $request->accreditation_status;
+    $university->save();
+
+    return redirect()->route('homepage')->with('success', 'University accredited successfully.');
+}
+
+     public function showAccredited()
+     {
+         // Fetch universities where accreditation_status is 'accredited'
+         $accreditedUniversities = University::where('accreditation_status', 'accredited')->get();
+     
+         // Return them to a view (e.g., accreditedUniversities.blade.php)
+         return view('universities', compact('accreditedUniversities'));
+     }
+     
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('rankings', function (Blueprint $table) {
             $table->id('ranking_id');
-            $table->unsignedBigInteger('university_id');
+            $table->unsignedBigInteger('uni_id');
             $table->string('ranking_criteria');
             $table->float('rank_value');
             $table->integer('ranking_year');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('published_date');
             $table->timestamps();
         
-            $table->foreign('university_id')->references('uni_id')->on('universities')->onDelete('cascade');
+            $table->foreign('uni_id')->references('uni_id')->on('universities')->onDelete('cascade');
         });
         
     }

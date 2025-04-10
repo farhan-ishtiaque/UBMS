@@ -1,0 +1,38 @@
+/* university.css */
+.container {
+    max-width: 800px;
+    margin-top: 50px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+form label {
+    font-weight: 500;
+}
+
+select.form-control {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+button.btn-primary {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button.btn-primary:hover {
+    background-color: #007bff;
+}
