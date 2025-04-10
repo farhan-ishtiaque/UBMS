@@ -7,15 +7,35 @@ use Illuminate\Http\Request;
 class AboutController extends Controller
 {
     /**
-     * Display the about page with former chairmen data
+     * Display the about page with former chairmen data.
      */
     public function index()
     {
         $formerChairmen = [
-            ['name' => 'Professor Dr. Muzaffar Ahmed Chowdhury', 'from' => '13-04-1973', 'to' => '25-01-1975'],
-            ['name' => 'Professor ABM Habibullah', 'from' => '12-02-1975', 'to' => '05-07-1977'],
-            ['name' => 'Professor Dr. M A Naser', 'from' => '06-07-1977', 'to' => '17-02-1981'],
-            // Add all other chairmen...
+            [
+                'name' => 'Professor Dr. Farhan Ishtiaque',
+                'from' => '2006',
+                'to' => '2010',
+                'linkedin' => 'https://www.linkedin.com/in/farhan-ishtiaque?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
+            ],
+            [
+                'name' => 'Professor Dr. Asfiya Rashid Chowdhury',
+                'from' => '2011',
+                'to' => '2015',
+                'linkedin' => 'https://www.linkedin.com/in/asfiya-chowdhury?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
+            ],
+            [
+                'name' => 'Professor Dr. Minhaj Rafi',
+                'from' => '2016',
+                'to' => '2021',
+                'linkedin' => 'https://www.linkedin.com/in/minhaj-rafi-837414314?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
+            ],
+            [
+                'name' => 'Professor Dr. Ahmed Kiser',
+                'from' => '2022',
+                'to' => 'Present',
+                'linkedin' => 'https://www.linkedin.com/in/ahmed-11-kiser?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
+            ],
         ];
 
         return view('about', [
