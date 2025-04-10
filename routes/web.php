@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ModeratorDashboardController;
+use App\Http\Controllers\UmsbDashboardController;
 use App\Http\Controllers\UniAdminDashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -28,6 +29,7 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 
 Route::get('/mod/dashboard', [ModeratorDashboardController::class, 'runDashboard'])->name('moderator.dashboard');
+Route::get('/ubms/dashboard', [UmsbDashboardController::class, 'runDashboard'])->name('ubms.dashboard');
 
 
 
@@ -35,6 +37,7 @@ Route::get('/mod/dashboard', [ModeratorDashboardController::class, 'runDashboard
 // web.php
 Route::get('/dashboard-data', [ModeratorDashboardController::class, 'getDashboardData']);
 Route::get('/dashboard-data2', [UniAdminDashboardController::class, 'getDashboardData']);
+Route::get('/dashboard-data3', [UmsbDashboardController::class, 'getDashboardData']);
 
 
 Route::middleware(['auth', 'university.admin'])->group(function () {

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UBMS Dashboard</title>
+  <title>UMSB Dashboard</title>
   <!-- Link to external CSS and Font Awesome icons -->
   <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -13,20 +13,16 @@
   <aside class="sidebar">
     <div class="logo-container">
       <i class="fas fa-university logo-icon"></i>
-      <span class="logo-text">UBMS</span>
+      <span class="logo-text">UMSB</span>
     </div>
     <ul class="menu">
       <li class="menu-item"><a href="{{route('universities.accredited')}}" class="menu-link"><i class="fas fa-university"></i>Universities</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-users"></i> Users</a></li>
+      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-user-graduate"></i> Students</a></li>
       <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-chalkboard-teacher"></i> Faculties</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-user-graduate"></i>  Students</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-building"></i>  Departments</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-book"></i>  Courses</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-briefcase"></i>  Job Postings</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-user-tie"></i>  Faculty Recruitment</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-trophy"></i>  Rankings</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-chalkboard"></i>  Faculty Development</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-money-check-alt"></i>  University Fundings</a></li>
+      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-briefcase"></i> Job Postings</a></li>
+      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-trophy"></i> Rankings</a></li>
+      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-chalkboard"></i> Faculty Development</a></li>
+      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-money-check-alt"></i> University Fundings</a></li>
     </ul>
   </aside>
 
@@ -50,7 +46,6 @@
           <h3 class="card-title">Total Universities</h3>
         </div>
         <div class="card-value" id="total-universities">Loading...</div>
-        
       </div>
 
       <div class="card card-2">
@@ -59,7 +54,6 @@
           <h3 class="card-title">Public Universities</h3>
         </div>
         <div class="card-value" id="public-universities">Loading...</div>
-        
       </div>
 
       <div class="card card-3">
@@ -68,7 +62,6 @@
           <h3 class="card-title">Private Universities</h3>
         </div>
         <div class="card-value" id="private-universities">Loading...</div>
-        
       </div>
 
       <!-- Faculty Cards -->
@@ -78,7 +71,6 @@
           <h3 class="card-title">Total Faculties</h3>
         </div>
         <div class="card-value" id="total-faculties">Loading...</div>
-        
       </div>
 
       <div class="card card-5">
@@ -87,7 +79,6 @@
           <h3 class="card-title">Public Faculties</h3>
         </div>
         <div class="card-value" id="public-faculties">Loading...</div>
-        
       </div>
 
       <div class="card card-6">
@@ -96,7 +87,6 @@
           <h3 class="card-title">Private Faculties</h3>
         </div>
         <div class="card-value" id="private-faculties">Loading...</div>
-        
       </div>
 
       <!-- Student Cards -->
@@ -106,7 +96,6 @@
           <h3 class="card-title">Total Students</h3>
         </div>
         <div class="card-value" id="total-students">Loading...</div>
-        
       </div>
 
       <div class="card card-8">
@@ -115,7 +104,6 @@
           <h3 class="card-title">Public Students</h3>
         </div>
         <div class="card-value" id="public-students">Loading...</div>
-        
       </div>
 
       <div class="card card-1">
@@ -124,7 +112,6 @@
           <h3 class="card-title">Private Students</h3>
         </div>
         <div class="card-value" id="private-students">Loading...</div>
-        
       </div>
 
       <!-- Other Cards -->
@@ -134,7 +121,6 @@
           <h3 class="card-title">Job Postings</h3>
         </div>
         <div class="card-value" id="job-postings">Loading...</div>
-        
       </div>
 
       <div class="card card-3">
@@ -143,12 +129,11 @@
           <h3 class="card-title">Faculty Programs</h3>
         </div>
         <div class="card-value" id="faculty-programs">Loading...</div>
-        
       </div>
     </div>
   </main>
   
-  <!-- Link to external JavaScript -->
-  <script src="{{ asset('js/dashboard.js') }}"></script>
+  <!-- Link to external JavaScript (reusing the same JS file) -->
+  <script src="{{ asset('js/ubms_dashboard.js') }}"></script>
 </body>
 </html>

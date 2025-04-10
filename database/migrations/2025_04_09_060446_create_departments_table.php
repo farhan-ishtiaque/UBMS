@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('uni_id');
             $table->string('dept_name');
             $table->string('email_address')->nullable();
+            $table->string('phone_number')->nullable();
             $table->enum('programs', ['Undergraduate', 'Postgraduate']);
             $table->timestamps();
         
