@@ -22,21 +22,84 @@ class AuthController extends Controller
     }
 
 
-    public function loginPost(Request $request)
+    /*public function loginPost(Request $request)
     {
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:6',
         ]);
 
-        if (auth()->attempt($request->only('email', 'password'))) {
-            return redirect()->intended(route('moderator.dashboard'))->with('success', 'Login successful');
+        $credentials = $request->only('email', 'password');
+
+
+        // In loginPost method
+        if (auth()->attempt($credentials)) {
+            dd(auth()->user()); // Check what user is returned
+        } else {
+            dd('Failed login attempt');
         }
+
+
+        if (auth()->attempt($credentials)) {
+
+            $user = auth()->user();
+
+            // Redirect based on role
+            switch ($user->type) {
+                case 'moderators':
+                    return redirect()->route('moderator.dashboard');
+                case 'umsb_personnel':
+                    return redirect()->route('ubms.dashboard');
+                case 'university_admin':
+                    session(['uni_id' => $user->uni_id]); // Important for university admin
+                    return redirect()->route('uniAdmin.dashboard');
+                default:
+                    auth()->logout();
+                    return redirect()->route('login')->with('error', 'Unknown user type');
+            }
+        }
+
 
         return redirect()->back()
             ->withErrors(['email' => 'Invalid credentials'])
             ->withInput();
+    }*/
+
+    public function loginPost(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required|min:6',
+    ]);
+
+    $credentials = $request->only('email', 'password');
+
+    if (auth()->attempt($credentials)) {
+        $user = auth()->user();
+
+        // Handle redirection based on user type
+        switch ($user->type) {
+            case 'moderators':
+                return redirect()->route('moderator.dashboard');
+            
+            case 'umsb_personnel':
+                return redirect()->route('ubms.dashboard');
+            
+            case 'university_admin':
+                session(['uni_id' => $user->uni_id]);
+                return redirect()->route('uniAdmin.dashboard');
+            
+            default:
+                auth()->logout();
+                return redirect()->route('login')->with('error', 'Unauthorized user type.');
+        }
     }
+
+    return redirect()->back()
+        ->withErrors(['email' => 'Invalid credentials'])
+        ->withInput();
+}
+
 
     public function registrationPost(Request $request)
     {

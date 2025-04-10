@@ -36,22 +36,42 @@ Route::get('/ubms/dashboard', [UmsbDashboardController::class, 'runDashboard'])-
 
 
 
-// web.php
+// dashboard data for cards
 Route::get('/dashboard-data', [ModeratorDashboardController::class, 'getDashboardData']);
 Route::get('/dashboard-data2', [UniAdminDashboardController::class, 'getDashboardData']);
 Route::get('/dashboard-data3', [UmsbDashboardController::class, 'getDashboardData']);
 
 
-Route::middleware(['auth', 'university.admin'])->group(function () {
-    Route::get('/admin/dashboard', [UniAdminDashboardController::class, 'show'])
-    ->name('uniAdmin.dashboard');
+
+// Moderator dashboard
+/*Route::middleware(['auth', 'moderators'])->group(function () {
+    Route::get('/mod/dashboard', [ModeratorDashboardController::class, 'runDashboard'])->name('moderator.dashboard');
+    Route::get('/dashboard-data', [ModeratorDashboardController::class, 'getDashboardData']);
 });
 
+// UMSB dashboard
+Route::middleware(['auth', 'umsb'])->group(function () {
+    Route::get('/ubms/dashboard', [UmsbDashboardController::class, 'runDashboard'])->name('ubms.dashboard');
+    Route::get('/dashboard-data3', [UmsbDashboardController::class, 'getDashboardData']);
+});
 
-    Route::post('/logout', function () {
-        auth()->logout();
-        session()->invalidate();
-        session()->regenerateToken();
-        return redirect(route('homepage'));
-    })->name('logout');
-    
+// University admin dashboard (already exists)
+Route::middleware(['auth', 'university.admin'])->group(function () {
+    Route::get('/admin/dashboard', [UniAdminDashboardController::class, 'show'])->name('uniAdmin.dashboard');
+    Route::get('/dashboard-data2', [UniAdminDashboardController::class, 'getDashboardData']);
+});*/
+
+Route::get('/moderator/dashboard', [ModeratorDashboardController::class, 'runDashboard'])->name('moderator.dashboard');
+Route::get('/ubms/dashboard', [UmsbDashboardController::class, 'runDashboard'])->name('ubms.dashboard');
+Route::get('/uni-admin/dashboard', [UniAdminDashboardController::class, 'show'])->name('uniAdmin.dashboard');
+
+
+
+
+Route::post('/logout', function () {
+    auth()->logout();
+    session()->invalidate();
+    session()->regenerateToken();
+    return redirect(route('homepage'));
+})->name('logout');
+

@@ -27,6 +27,22 @@ class UserSeeder extends Seeder
             'password' => Hash::make('admin123'),
             'type' => 'moderators',
         ],
+        [
+            'FirstName' => 'Minhaj',
+            'LastName' => 'Rashid',
+            'PhoneNumber' => '9876543210',
+            'email' => 'admin1@example.com',
+            'password' => Hash::make('admin123'),
+            'type' => 'university_admin',
+        ],
+        [
+            'FirstName' => 'Tazrian',
+            'LastName' => 'Rashid',
+            'PhoneNumber' => '9876543210',
+            'email' => 'umsb1@example.com',
+            'password' => Hash::make('admin123'),
+            'type' => 'umsb_personnel',
+        ],
     ];
 
     foreach ($moderators as $mod) {
