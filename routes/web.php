@@ -32,4 +32,25 @@ Route::get('/universities/accredited', [UniversityController::class, 'showAccred
 Route::get('/mod/dashboard', [ModeratorDashboardController::class, 'runDashboard'])->name('moderator.dashboard');
 
 Route::get('/dashboard-data', [ModeratorDashboardController::class, 'getDashboardData']);
+use App\Http\Controllers\UserController;
 
+// Show all users
+Route::get('/users', [UserController::class, 'showUsers'])->name('users.list');
+
+// Search users
+Route::get('/users/search', [UserController::class, 'showSearchedUsers'])->name('users.search');
+
+// Show edit form
+Route::get('/user/{id}/edit', [UserController::class, 'editUser'])->name('user.edit');
+
+// Handle update
+Route::put('/user/{id}/update', [UserController::class, 'updateUser'])->name('user.update');
+// Delete user - confirmation page
+Route::get('/user/{id}/delete', [UserController::class, 'confirmDelete'])->name('user.confirmDelete');
+
+// Delete user - action
+Route::delete('/user/{id}/delete', [UserController::class, 'deleteUser'])->name('user.delete');
+
+// User delete page (list + search)
+Route::get('/users/delete-page', [UserController::class, 'showDeleteUsers'])->name('users.delete.page');
+Route::get('/users/delete-search', [UserController::class, 'showDeleteUsers'])->name('users.search.delete');
