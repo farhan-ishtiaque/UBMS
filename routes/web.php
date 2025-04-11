@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ModeratorDashboardController;
 use Illuminate\Support\Facades\Route;
@@ -74,3 +74,28 @@ Route::get('/students/create', [StudentsController::class, 'create'])->name('stu
 Route::post('/students', [StudentsController::class, 'store'])->name('students.store');
 Route::get('/students/{student}/edit', [StudentsController::class, 'edit'])->name('students.edit');
 Route::put('/students/{student}', [StudentsController::class, 'update'])->name('students.update');
+use App\Http\Controllers\DepartmentsController;
+
+Route::get('departments', [DepartmentsController::class, 'index'])->name('departments.index'); // View all departments
+Route::get('departments/create', [DepartmentsController::class, 'create'])->name('departments.create');
+Route::post('departments', [DepartmentsController::class, 'store'])->name('departments.store');
+Route::get('/departments/manage', [DepartmentsController::class, 'manage'])->name('departments.manage');
+Route::get('departments/{id}/edit', [DepartmentsController::class, 'edit'])->name('departments.edit');
+Route::put('departments/{id}', [DepartmentsController::class, 'update'])->name('departments.update');
+Route::get('/departments/delete', [DepartmentsController::class, 'deleteDepartment'])->name('departments.deletePage');
+Route::delete('/departments/{id}', [DepartmentsController::class, 'destroy'])->name('departments.destroy');
+Route::get('courses', [CoursesController::class, 'index'])->name('courses.index');
+Route::get('/courses/create', [CoursesController::class, 'create'])->name('courses.create');
+Route::post('/courses', [CoursesController::class, 'store'])->name('courses.store');
+Route::get('/courses/{id}/edit', [CoursesController::class, 'edit'])->name('courses.edit');
+Route::put('/courses/{id}', [CoursesController::class, 'update'])->name('courses.update');
+Route::get('/courses/select', [CoursesController::class, 'selectPage'])->name('courses.select');
+Route::get('courses/list', [CoursesController::class, 'list'])->name('courses.list');
+
+// Confirm Delete Route
+Route::get('courses/{id}/delete', [CoursesController::class, 'confirmDelete'])->name('courses.delete.confirm');
+
+// Actual Delete Route
+Route::delete('courses/{id}', [CoursesController::class, 'delete'])->name('courses.delete');
+
+
