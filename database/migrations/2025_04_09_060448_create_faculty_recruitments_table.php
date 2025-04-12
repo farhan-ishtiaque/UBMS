@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('faculty_recruitments', function (Blueprint $table) {
             $table->id('recruitment_id');
+            $table->unsignedBigInteger('dept_id');
+            $table->unsignedBigInteger('uni_id');
             $table->unsignedBigInteger('job_id');
             $table->string('first_name');
             $table->string('last_name');
@@ -20,7 +22,7 @@ return new class extends Migration
             $table->string('designation');
             $table->string('email')->unique();
             $table->string('qualification');
-            $table->string('teaching_experience');
+            $table->integer('teaching_experience');
             $table->enum('recruitment_status', ['Declined', 'Waiting', 'Approved']);
             $table->timestamps();
             $table->foreign('job_id')->references('job_id')->on('job_postings')->onDelete('cascade');

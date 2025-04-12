@@ -22,7 +22,7 @@ class Courses extends Model
  
 public function faculties()
 {
-    return $this->belongsToMany(Faculty::class, 'course_faculty')
+    return $this->belongsToMany(Faculties::class, 'course_faculty')
                 ->withPivot(['semester', 'is_primary_instructor'])
                 ->withTimestamps();
 }

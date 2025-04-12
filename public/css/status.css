@@ -1,0 +1,51 @@
+/* public/css/styles.css */
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f3f4f6;
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #1f2937;
+}
+
+a, button {
+    font-family: inherit;
+}
+
+.search-box input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 250px;
+}
+
+button {
+    padding: 8px 14px;
+    margin-right: 5px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+button:hover {
+    background-color: #1d4ed8;
+}
+
+.job-listing, .applicant-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}

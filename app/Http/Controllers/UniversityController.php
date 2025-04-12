@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\University; // Assuming your model is named University
+use App\Models\University; 
 use Illuminate\Support\Facades\Log;
 
 class UniversityController extends Controller

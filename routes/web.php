@@ -8,6 +8,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\UniRegistrationController;
 use App\Http\Controllers\RecruitmentController;
+use App\Http\Controllers\FacultyCourseAssignmentController;
 
 
 // Homepage Route
@@ -107,24 +108,33 @@ Route::get('/job-postings/create', [JobPostingsController::class, 'create'])->na
 
 Route::post('/job-postings', [JobPostingsController::class, 'store'])->name('job-postings.store');
 Route::get('/job-postings/list', [JobPostingsController::class, 'index'])->name('job-postings.index');
+
+
 use App\Http\Controllers\FacultyRecruitmentController;
+
+// Route to display job postings with an optional search filter by university name
+Route::get('/job-listings', [JobPostingsController::class, 'index2'])->name('job-listings.index2');
+
+// Route to show applicants for a specific job posting
+Route::get('/job-listings/applicants/{jobId}', [JobPostingsController::class, 'showApplicants'])->name('job-listings.applicants');
+
+// Route to update the recruitment status of an applicant
+Route::put('/faculty-recruitment/update-status/{applicantId}', [FacultyRecruitmentController::class, 'updateStatus'])
+    ->name('faculty-recruitment.updateStatus');
+
 Route::get('/faculty-recruitment/create/{job_id}', [FacultyRecruitmentController::class, 'create'])->name('faculty-recruitment.create');
 Route::post('/faculty-recruitment/store', [FacultyRecruitmentController::class, 'store'])->name('faculty-recruitment.store');
-Route::get('/update-status', [RecruitmentController::class, 'showUpdateForm'])->name('update-status');
-Route::post('/update-status/save', [RecruitmentController::class, 'saveStatusUpdates'])->name('update-status.save');
+
+
 
 use App\Http\Controllers\FacultyDevelopmentController;
 
 Route::get('/faculty-development/create', [FacultyDevelopmentController::class, 'create'])->name('faculty_development.create');
 Route::post('/faculty-development', [FacultyDevelopmentController::class, 'store'])->name('faculty_development.store');
 Route::get('/faculty-development', [FacultyDevelopmentController::class, 'index'])->name('faculty_development.index');
-Route::prefix('faculty/{faculty}')->group(function () {
-    Route::get('/assign-courses', [FacultyCourseAssignmentController::class, 'create'])
-         ->name('faculty.assign-courses.create');
-         
-    Route::post('/assign-courses', [FacultyCourseAssignmentController::class, 'store'])
-         ->name('faculty.assign-courses.store');
-         
-    Route::delete('/assign-courses/{course}', [FacultyCourseAssignmentController::class, 'destroy'])
-         ->name('faculty.assign-courses.destroy');
-});
+Route::get('/assign-courses', [FacultyCourseAssignmentController::class, 'create'])
+     ->name('faculty.assign-courses.create');
+
+Route::post('/assign-courses', [FacultyCourseAssignmentController::class, 'store'])
+     ->name('faculty.assign-courses.store');
+
