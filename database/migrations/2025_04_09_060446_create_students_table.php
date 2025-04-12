@@ -16,13 +16,16 @@ return new class extends Migration
             $table->unsignedBigInteger('dept_id'); // Foreign key for departments
             $table->unsignedBigInteger('uni_id'); // Foreign key for universities
             $table->string('first_name');
-            $table->string('middle_name')->nullable(); // Optional field
             $table->string('last_name');
+            $table->string('email')->unique(); // Unique email field
+            $table->string('phone_number')->nullable(); // Phone number field, optional
+            $table->string('address')->nullable(); // Address field, optional
             $table->enum('gender', ['male', 'female', 'other']); // Gender field
             $table->date('date_of_birth');
+            $table->integer('age')->nullable(); // Age field, optional
             $table->decimal('cgpa', 3, 2)->nullable(); // CGPA field, nullable
             $table->enum('graduation_status', ['graduated', 'not_graduated'])->default('not_graduated'); // Graduation status
-            $table->date('graduation_date')->nullable(); // Graduation date, optional
+            
             $table->timestamps(); // Created at and updated at timestamps
 
             // Foreign key constraints

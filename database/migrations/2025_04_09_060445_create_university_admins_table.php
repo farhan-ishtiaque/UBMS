@@ -14,13 +14,12 @@ return new class extends Migration
         Schema::create('university_admins', function (Blueprint $table) {
             $table->id('admin_id');
             $table->unsignedBigInteger('uni_id');
-            $table->string('admin_name');
+            $table->string('first_name');
+            $table->string('last_name');
             $table->string('designation')->nullable();
-            $table->enum('status', ['Active', 'Inactive']);
-            $table->date('joining_date');
-            $table->date('leaving_date')->nullable();
             $table->string('email_address');
             $table->string('phone_number');
+            $table->string('password');
             $table->timestamps();
         
             $table->foreign('uni_id')->references('uni_id')->on('universities')->onDelete('cascade');

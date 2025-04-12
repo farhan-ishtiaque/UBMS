@@ -16,14 +16,14 @@
       <span class="logo-text">UBMS</span>
     </div>
     <ul class="menu">
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-chalkboard-teacher"></i> Faculties</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-user-graduate"></i> Students</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-building"></i> Departments</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-book"></i> Courses</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-briefcase"></i> Job Postings</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-user-tie"></i> Faculty Recruitment</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-chalkboard"></i> Faculty Development</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-money-check-alt"></i> University Fundings</a></li>
+      <li class="menu-item"><a href="{{route('admin_faculties_menu')}}" class="menu-link"><i class="fas fa-chalkboard-teacher"></i> Faculties</a></li>
+      <li class="menu-item"><a href="{{route('admin_students_menu')}}" class="menu-link"><i class="fas fa-user-graduate"></i> Students</a></li>
+      <li class="menu-item"><a href="{{route('admin_departments_menu')}}" class="menu-link"><i class="fas fa-building"></i> Departments</a></li>
+      <li class="menu-item"><a href="{{route('admin_courses_menu')}}" class="menu-link"><i class="fas fa-book"></i> Courses</a></li>
+      <li class="menu-item"><a href="{{route('admin_jobposting_menu')}}" class="menu-link"><i class="fas fa-briefcase"></i> Job Postings</a></li>
+      <li class="menu-item"><a href="{{route('admin_facultyrecruitment_menu')}}" class="menu-link"><i class="fas fa-user-tie"></i> Faculty Recruitment</a></li>
+      <li class="menu-item"><a href="{{route('admin_facultydevelopment_menu')}}" class="menu-link"><i class="fas fa-chalkboard"></i> Faculty Development</a></li>
+      <li class="menu-item"><a href="{{route('admin_unifunding_menu')}}" class="menu-link"><i class="fas fa-money-check-alt"></i> University Fundings</a></li>
     </ul>
   </aside>
 

@@ -16,13 +16,13 @@
       <span class="logo-text">UMSB</span>
     </div>
     <ul class="menu">
-      <li class="menu-item"><a href="{{route('universities.accredited')}}" class="menu-link"><i class="fas fa-university"></i>Universities</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-user-graduate"></i> Students</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-chalkboard-teacher"></i> Faculties</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-briefcase"></i> Job Postings</a></li>
+      <li class="menu-item"><a href="{{route('ubms_uni_menu')}}" class="menu-link"><i class="fas fa-university"></i>Universities</a></li>
+      <li class="menu-item"><a href="{{route('ubms_students_menu')}}" class="menu-link"><i class="fas fa-user-graduate"></i> Students</a></li>
+      <li class="menu-item"><a href="{{route('ubms_faculties_menu')}}" class="menu-link"><i class="fas fa-chalkboard-teacher"></i> Faculties</a></li>
+      <li class="menu-item"><a href="{{route('ubms_jobposting_menu')}}" class="menu-link"><i class="fas fa-briefcase"></i> Job Postings</a></li>
       <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-trophy"></i> Rankings</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-chalkboard"></i> Faculty Development</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-money-check-alt"></i> University Fundings</a></li>
+      <li class="menu-item"><a href="{{route('ubms_facultydevelopment_menu')}}" class="menu-link"><i class="fas fa-chalkboard"></i> Faculty Development</a></li>
+      <li class="menu-item"><a href="{{route('ubms_unifunding_menu')}}" class="menu-link"><i class="fas fa-money-check-alt"></i> University Fundings</a></li>
     </ul>
   </aside>
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -7,7 +8,12 @@ class Courses extends Model
 {
     protected $primaryKey = 'course_id';
 
-    protected $fillable = ['dept_id', 'course_name', 'credits', 'semester', 'year'];
+    protected $fillable = [
+        'dept_id',
+        'course_name',
+        'course_code',
+        'credits'
+    ];
 
     public function department()
     {
@@ -16,7 +22,8 @@ class Courses extends Model
 
     public function students()
     {
-        return $this->belongsToMany(Students::class, 'enrollment')
-                    ->withPivot('attendance', 'grade', 'semester', 'year');
+        return $this->belongsToMany(Students::class, 'enrollment', 'course_id', 'student_id')
+                    ->withPivot('semester', 'year', 'grade')
+                    ->withTimestamps();
     }
 }
