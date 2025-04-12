@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\FacultyRecruitment;
 use App\Models\University;
 use App\Models\Departments;
 use App\Models\JobPostings;
@@ -54,5 +54,26 @@ class JobPostingsController extends Controller
     $jobPostings = JobPostings::with(['university', 'department'])->latest()->get();
     return view('job_postings.index', compact('jobPostings'));
 }
+public function index2(Request $request)
+{
+    // If there's a university name provided, filter the job postings
+    $jobPostings = JobPostings::with(['university', 'department'])
+        ->when($request->uni_name, function ($query) use ($request) {
+            return $query->whereHas('university', function ($q) use ($request) {
+                $q->where('uni_name', 'like', '%' . $request->uni_name . '%');
+            });
+        })
+        ->latest()
+        ->get();
 
+    return view('job_postings.index2', compact('jobPostings'));
+}
+
+public function showApplicants($jobId)
+{
+    // Get the applicants for a specific job posting
+    $applicants = FacultyRecruitment::where('job_id', $jobId)->get();
+
+    return view('job_postings.applicants', compact('applicants', 'jobId'));
+}
 }

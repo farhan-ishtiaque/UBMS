@@ -1,268 +1,157 @@
 $(document).ready(function() {
-    let currentPage = 1;
-    let totalPages = 1;
-    let selectedStudentId = null;
-
-    // Search for students
+    // Search function
     $('#searchBtn').click(function() {
-        currentPage = 1;
-        searchStudents();
+        const search = $('#searchInput').val();
+        $.ajax({
+            url: "{{ route('admin_students.update.search') }}",
+            type: "GET",
+            data: { search: search },
+            success: function(response) {
+                updateResultsTable(response);
+                updatePaginationControls(response);
+            },
+            error: function(xhr) {
+                console.error('Search error:', xhr.responseText);
+                $('#resultsBody').html('<tr><td colspan="5" class="text-center">Error loading results</td></tr>');
+            }
+        });
     });
 
-    $('#searchInput').keypress(function(e) {
-        if (e.which === 13) {
-            currentPage = 1;
-            searchStudents();
-        }
-    });
+    function updateResultsTable(data) {
+        const $tbody = $('#resultsBody');
+        $tbody.empty();
 
-    // Handle pagination
-    $(document).on('click', '.page-btn', function() {
-        currentPage = $(this).data('page');
-        searchStudents();
-    });
-
-    // Handle student selection
-    $(document).on('change', 'input[name="studentRadio"]', function() {
-        selectedStudentId = $(this).val();
-        loadStudentData(selectedStudentId);
-    });
-
-    // Cancel update
-    $('#cancelUpdate').click(function() {
-        $('#updateFormSection').hide();
-        $('input[name="studentRadio"]').prop('checked', false);
-        selectedStudentId = null;
-    });
-
-    // Department dropdown change based on university
-    $('#uni_id').change(function() {
-        const universityId = $(this).val();
-        if (universityId) {
-            $.get(`/departments/by-university/${universityId}`, function(data) {
-                const deptSelect = $('#dept_id');
-                deptSelect.empty().append('<option value="">Select a Department</option>');
-                data.forEach(dept => {
-                    deptSelect.append(`<option value="${dept.dept_id}">${dept.dept_name}</option>`);
-                });
-                
-                // If we have a selected student, try to set their department again
-                if (selectedStudentId) {
-                    loadStudentData(selectedStudentId);
-                }
-            });
-        } else {
-            $('#dept_id').empty().append('<option value="">Select a Department</option>');
-        }
-    });
-
-    // Form submission
-    $('#updateStudentForm').submit(function(e) {
-        e.preventDefault();
-        
-        if (!selectedStudentId) {
-            alert('Please select a student first');
+        if (data.data.length === 0) {
+            $tbody.append('<tr><td colspan="5" class="text-center">No students found</td></tr>');
             return;
         }
-        
-        // Show loading state
-        $('#updateFormSection').hide();
-        $('#loadingIndicator').show();
+
+        data.data.forEach(student => {
+            const status = student.graduation_status === 'graduated' ? 
+                '<span class="badge bg-success">Graduated</span>' : 
+                '<span class="badge bg-warning text-dark">Not Graduated</span>';
+
+            $tbody.append(`
+                <tr>
+                    <td><button class="btn btn-sm btn-primary select-btn" data-id="${student.student_id}">Select</button></td>
+                    <td>${student.first_name} ${student.last_name}</td>
+                    <td>${student.email}</td>
+                    <td>${student.department?.dept_name || 'N/A'}</td>
+                    <td>${status}</td>
+                </tr>
+            `);
+        });
+
+        $('.select-btn').click(function() {
+            const studentId = $(this).data('id');
+            loadStudent(studentId);
+        });
+    }
+
+    function loadStudent(studentId) {
+        $.ajax({
+            url: "{{ route('admin_students.update.get', ['id' => '__ID__']) }}".replace('__ID__', studentId),
+            type: "GET",
+            success: function(response) {
+                populateForm(response);
+                $('#updateFormSection').show();
+                $('html, body').animate({
+                    scrollTop: $('#updateFormSection').offset().top
+                }, 500);
+            },
+            error: function(xhr) {
+                console.error('Error loading student:', xhr.responseText);
+                alert('Failed to load student data');
+            }
+        });
+    }
+
+    function populateForm(student) {
+        $('#student_id').val(student.student_id);
+        $('#dept_id').val(student.dept_id);
+        $('#first_name').val(student.first_name);
+        $('#last_name').val(student.last_name);
+        $('#email').val(student.email);
+        $('#phone_number').val(student.phone_number);
+        $('#address').val(student.address);
+        $('#gender').val(student.gender);
+        $('#date_of_birth').val(student.date_of_birth);
+        $('#cgpa').val(student.cgpa);
+        $('#graduation_status').val(student.graduation_status);
+    }
+
+    $('#updateStudentForm').submit(function(e) {
+        e.preventDefault();
+        const studentId = $('#student_id').val();
         
         $.ajax({
-            url: `/moderator/dashboard/mod_students_menu/students-update/update/${selectedStudentId}`,
-            type: 'PUT',
+            url: "{{ route('admin_students.update.submit', ['id' => '__ID__']) }}".replace('__ID__', studentId),
+            type: "PUT",
             data: $(this).serialize(),
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(response) {
                 alert(response.message);
-                searchStudents(); // Refresh the search results
+                $('#searchBtn').click();
+                $('#updateFormSection').hide();
             },
             error: function(xhr) {
-                let errorMsg = 'Error updating student';
-                if (xhr.responseJSON && xhr.responseJSON.message) {
-                    errorMsg += ': ' + xhr.responseJSON.message;
-                }
-                alert(errorMsg);
-            },
-            complete: function() {
-                $('#loadingIndicator').hide();
-                $('#updateFormSection').show();
+                console.error('Error updating student:', xhr.responseText);
+                alert('Error updating student');
             }
         });
     });
 
-    function searchStudents() {
-        const searchTerm = $('#searchInput').val();
-        
-        // Show loading state
-        $('#resultsBody').html('<tr><td colspan="6" class="text-center">Loading...</td></tr>');
-        $('#paginationControls').empty();
-        
-        $.ajax({
-            url: '/moderator/dashboard/mod_students_menu/students-update/update/search',
-            type: 'POST',
-            data: {
-                search: searchTerm,
-                page: currentPage
-            },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                displayResults(response);
-            },
-            error: function(xhr) {
-                $('#resultsBody').html('<tr><td colspan="6" class="text-center">Error loading results</td></tr>');
-                console.error('Search error:', xhr.responseText);
-            }
-        });
-    }
+    $('#cancelUpdate').click(function() {
+        $('#updateFormSection').hide();
+    });
 
-    function displayResults(data) {
-        const resultsBody = $('#resultsBody');
-        resultsBody.empty();
+    function updatePaginationControls(data) {
+        const $paginationInfo = $('#paginationInfo');
+        const $paginationControls = $('#paginationControls');
         
-        if (data.data.length === 0) {
-            resultsBody.append('<tr><td colspan="6" class="text-center">No students found</td></tr>');
-            return;
-        }
-        
-        data.data.forEach(student => {
-            const row = `
-                <tr>
-                    <td><input type="radio" name="studentRadio" value="${student.student_id}" ${selectedStudentId == student.student_id ? 'checked' : ''}></td>
-                    <td>${student.first_name} ${student.last_name}</td>
-                    <td>${student.email}</td>
-                    <td>${student.university ? student.university.uni_name : 'N/A'}</td>
-                    <td>${student.department ? student.department.dept_name : 'N/A'}</td>
-                    <td>
-                        <span class="status-badge ${student.graduation_status === 'graduated' ? 'graduated' : 'not-graduated'}">
-                            ${student.graduation_status === 'graduated' ? 'Graduated' : 'Not Graduated'}
-                        </span>
-                    </td>
-                </tr>
-            `;
-            resultsBody.append(row);
-        });
-        
-        updatePagination(data);
-    }
+        $paginationInfo.empty();
+        $paginationControls.empty();
 
-    function updatePagination(data) {
-        currentPage = data.current_page;
-        totalPages = data.last_page;
-        
-        const paginationControls = $('#paginationControls');
-        paginationControls.empty();
-        
-        if (totalPages <= 1) return;
-        
-        // Previous button
-        if (currentPage > 1) {
-            paginationControls.append(`<button class="page-btn" data-page="${currentPage - 1}">Previous</button>`);
-        }
-        
-        // Page numbers
-        const startPage = Math.max(1, currentPage - 2);
-        const endPage = Math.min(totalPages, currentPage + 2);
-        
-        for (let i = startPage; i <= endPage; i++) {
-            const activeClass = i === currentPage ? 'active' : '';
-            paginationControls.append(`<button class="page-btn ${activeClass}" data-page="${i}">${i}</button>`);
-        }
-        
-        // Next button
-        if (currentPage < totalPages) {
-            paginationControls.append(`<button class="page-btn" data-page="${currentPage + 1}">Next</button>`);
-        }
-        
-        // Pagination info
-        $('#paginationInfo').text(`Page ${currentPage} of ${totalPages} • ${data.total} students found`);
-    }
+        if (data.total > 0) {
+            $paginationInfo.text(`Showing ${data.from} to ${data.to} of ${data.total} students`);
+            
+            // Previous button
+            const prevDisabled = data.prev_page_url ? '' : 'disabled';
+            $paginationControls.append(`
+                <button class="btn btn-outline-primary page-btn" ${prevDisabled} 
+                    data-url="${data.prev_page_url || '#'}">
+                    Previous
+                </button>
+            `);
 
-    async function loadStudentData(studentId) {
-        try {
-            // Show loading state
-            $('#updateFormSection').hide();
-            $('#loadingIndicator').show();
-            
-            // 1. First fetch the student data
-            const studentResponse = await $.get(`/moderator/dashboard/mod_students_menu/students-update/update/${studentId}`);
-            const student = studentResponse;
-            
-            // 2. Fill all non-dependent fields
-            $('#student_id').val(student.student_id);
-            $('#first_name').val(student.first_name);
-            $('#last_name').val(student.last_name);
-            $('#email').val(student.email);
-            $('#phone_number').val(student.phone_number);
-            $('#address').val(student.address);
-            $('#gender').val(student.gender);
-            $('#date_of_birth').val(formatDateForInput(student.date_of_birth));
-            $('#cgpa').val(student.cgpa);
-            $('#graduation_status').val(student.graduation_status);
-            
-            // 3. Set university and load departments
-            $('#uni_id').val(student.uni_id);
-            
-            if (student.uni_id) {
-                // 4. Fetch departments for this university
-                const deptResponse = await $.get(`/departments/by-university/${student.uni_id}`);
-                const deptSelect = $('#dept_id');
-                
-                // Clear and repopulate departments
-                deptSelect.empty().append('<option value="">Select a Department</option>');
-                deptResponse.forEach(dept => {
-                    deptSelect.append(`<option value="${dept.dept_id}">${dept.dept_name}</option>`);
-                });
-                
-                // 5. Set the department after options are populated
-                if (student.dept_id) {
-                    // Small delay to ensure options are rendered
-                    setTimeout(() => {
-                        deptSelect.val(student.dept_id);
-                    }, 100);
+            // Next button
+            const nextDisabled = data.next_page_url ? '' : 'disabled';
+            $paginationControls.append(`
+                <button class="btn btn-outline-primary page-btn" ${nextDisabled} 
+                    data-url="${data.next_page_url || '#'}">
+                    Next
+                </button>
+            `);
+
+            // Page button click handler
+            $('.page-btn').click(function() {
+                if (!$(this).is(':disabled')) {
+                    const url = $(this).data('url');
+                    $.ajax({
+                        url: url,
+                        type: "GET",
+                        success: function(response) {
+                            updateResultsTable(response);
+                            updatePaginationControls(response);
+                        },
+                        error: function(xhr) {
+                            console.error(xhr.responseText);
+                        }
+                    });
                 }
-            } else {
-                $('#dept_id').empty().append('<option value="">Select a Department</option>');
-            }
-            
-            // 6. Finally show the form
-            $('#updateFormSection').show();
-        } catch (error) {
-            console.error('Error loading student:', error);
-            alert('Failed to load student data');
-        } finally {
-            $('#loadingIndicator').hide();
+            });
         }
-    }
-    
-    // Helper function to format date for input[type="date"]
-    function formatDateForInput(dateString) {
-        if (!dateString) return '';
-        
-        // If date is already in YYYY-MM-DD format
-        if (/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
-            return dateString;
-        }
-        
-        // If date comes as d/m/Y format
-        if (/^\d{2}\/\d{2}\/\d{4}$/.test(dateString)) {
-            const [day, month, year] = dateString.split('/');
-            return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-        }
-        
-        // For other formats (like from database)
-        const date = new Date(dateString);
-        if (isNaN(date.getTime())) return '';
-        
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        
-        return `${year}-${month}-${day}`;
     }
 });

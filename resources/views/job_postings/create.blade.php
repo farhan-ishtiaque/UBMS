@@ -8,7 +8,11 @@
 <body>
 <section class="job-posting-section">
   <div class="form-container">
+    <a href="{{ route('mod_jobposting_menu')}}" class="back-button">
+        <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+    </a>
     <div class="form-wrapper">
+      
       <h1 class="form-title">Create Job Posting</h1>
 
       @if(session('success'))

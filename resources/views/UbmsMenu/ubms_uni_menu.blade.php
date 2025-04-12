@@ -29,22 +29,17 @@
 
     <!-- Card Section -->
     <div class="card-grid">
-      <a href="{{route('universities.accredited')}}" class="card card-1">
+      <a href="{{route('ubms_universities.accredited')}}" class="card card-1">
         <div class="card-icon"><i class="fas fa-eye"></i></div>
         <h3 class="card-title">View Universities</h3>
       </a>
 
-      <a href="#" class="card card-2">
+      <a href="{{route('ubms_university.registration')}}" class="card card-2">
         <div class="card-icon"><i class="fas fa-plus-circle"></i></div>
         <h3 class="card-title">Register University</h3>
       </a>
 
-      <a href="#" class="card card-3">
-        <div class="card-icon"><i class="fas fa-edit"></i></div>
-        <h3 class="card-title">Update University</h3>
-      </a>
-
-      <a href="#" class="card card-4">
+      <a href="{{route('ubms_universities.update')}}" class="card card-4">
         <div class="card-icon"><i class="fas fa-sync-alt"></i></div>
         <h3 class="card-title">Change Accreditation</h3>
       </a>

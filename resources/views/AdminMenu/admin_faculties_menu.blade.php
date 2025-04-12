@@ -29,7 +29,7 @@
 
     <!-- Card Section -->
     <div class="card-grid">
-      <a href="#" class="card card-1">
+      <a href="{{route('admin.faculties.view')}}" class="card card-1">
         <div class="card-icon"><i class="fas fa-eye"></i></div>
         <h3 class="card-title">View Faculties</h3>
       </a>

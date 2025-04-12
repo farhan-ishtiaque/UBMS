@@ -39,12 +39,12 @@
         <h3 class="card-title">Register University</h3>
       </a>
 
-      <a href="#" class="card card-3">
+      <!--<a href="#" class="card card-3">
         <div class="card-icon"><i class="fas fa-edit"></i></div>
         <h3 class="card-title">Update University</h3>
-      </a>
+      </a>-->
 
-      <a href="#" class="card card-4">
+      <a href="{{route('universities.update')}}" class="card card-4">
         <div class="card-icon"><i class="fas fa-sync-alt"></i></div>
         <h3 class="card-title">Change Accreditation</h3>
       </a>

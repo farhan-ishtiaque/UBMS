@@ -1,58 +1,44 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
-use App\Models\Faculty;
-use App\Models\Course;
+use App\Models\Faculties;
+use App\Models\Courses;
 use Illuminate\Http\Request;
 
 class FacultyCourseAssignmentController extends Controller
 {
-    public function create($facultyId)
+    // Display form to assign courses to a faculty
+    public function create()
     {
-        $faculty = Faculty::with(['department.courses', 'courses'])->findOrFail($facultyId);
-        
-        // Get courses from the faculty's department that aren't already assigned
-        $assignedCourseIds = $faculty->courses->pluck('course_id')->toArray();
-        
-        $availableCourses = Courses::where('dept_id', $faculty->dept_id)
-                                ->whereNotIn('course_id', $assignedCourseIds)
-                                ->get();
-        
-        return view('assign_courses', [
-            'faculty' => $faculty,
-            'availableCourses' => $availableCourses,
-            'assignedCourses' => $faculty->courses
-        ]);
+        $faculties = Faculties::all();  // Get all faculties
+        $courses = Courses::all();     // Get all courses
+        return view('assign_courses', compact('faculties', 'courses'));
     }
 
-    public function store(Request $request, $facultyId)
+    // Store the course assignments
+    public function store(Request $request)
     {
         $request->validate([
+            'faculty_id' => 'required|exists:faculties,id',
             'courses' => 'required|array',
             'semester' => 'required|string',
         ]);
-        
-        $faculty = Faculty::findOrFail($facultyId);
-        
-        $coursesToAssign = [];
+
+        $faculty = Faculties::findOrFail($request->faculty_id);
+
+        // Prepare the data to insert into the pivot table
+        $dataToAttach = [];
         foreach ($request->courses as $courseId) {
-            $coursesToAssign[$courseId] = [
+            $dataToAttach[$courseId] = [
                 'semester' => $request->semester,
-                'is_primary_instructor' => $request->has('is_primary')
             ];
         }
-        
-        $faculty->courses()->syncWithoutDetaching($coursesToAssign);
-        
-        return redirect()->back()->with('success', 'Courses assigned successfully!');
-    }
 
-    public function destroy($facultyId, $courseId, Request $request)
-    {
-        $faculty = Faculty::findOrFail($facultyId);
-        $faculty->courses()->wherePivot('semester', $request->semester)->detach($courseId);
-        
-        return redirect()->back()->with('success', 'Course assignment removed!');
-    }
+        // Attach courses to faculty in pivot table
+        $faculty->courses()->syncWithoutDetaching($dataToAttach);
+
+        return redirect()->back()->with('success', 'Courses assigned successfully!');
+}
 }

@@ -108,4 +108,12 @@ public function destroy($id)
     return redirect()->route('departments.deletePage')->with('success', 'Department deleted successfully.');
 }
 
+
+public function getByUniversity($universityId)
+{
+    $departments = Departments::where('uni_id', $universityId)->get();
+
+    return response()->json($departments);
+}
+
 }

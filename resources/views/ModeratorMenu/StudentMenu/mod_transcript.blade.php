@@ -13,6 +13,9 @@
     <div class="container">
         <div class="card shadow-sm mb-4">
             <div class="card-body">
+                <a href="{{ route('mod_students_menu')}}" class="back-button">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+                </a>
                 <h2>Student Transcript Viewer</h2>
                 
                 <div class="row mb-4">

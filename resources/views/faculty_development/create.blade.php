@@ -3,6 +3,9 @@
 
 @section('content')
 <div class="container">
+    <a href="{{ route('mod_facultydevelopment_menu') }}" class="btn btn-outline-secondary mb-4">
+        <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+    </a>
     <h2>Add Faculty Development Program</h2>
     <form method="POST" action="{{ route('faculty_development.store') }}">
         @csrf

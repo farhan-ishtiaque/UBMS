@@ -4,11 +4,15 @@
 <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 
 <div class="container">
+    <a href="{{ route('mod_departments_menu') }}" class="btn btn-outline-secondary mb-4">
+        <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+    </a>
     <h2>Departments List</h2>
 
     <!-- University Dropdown -->
     <form method="GET" action="{{ route('departments.index') }}">
         <div class="mb-3">
+        
             <select name="uni_id" id="university" class="form-select" onchange="this.form.submit()">
                 <option value="">-- Select a University --</option>
                 @foreach($universities as $university)

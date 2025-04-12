@@ -2,6 +2,10 @@
 
 @section('content')
     <div class="container">
+
+        <a href="{{ route('mod_departments_menu') }}" class="btn btn-outline-secondary mb-4">
+            <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+        </a>
         <h2>Create Department</h2>
 
         <!-- University Selection Dropdown -->

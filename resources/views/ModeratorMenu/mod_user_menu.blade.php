@@ -29,7 +29,7 @@
 
     <!-- Card Section -->
     <div class="card-grid">
-      <a href="#" class="card card-1">
+      <a href="{{route('mod_view_users')}}" class="card card-1">
         <div class="card-icon"><i class="fas fa-eye"></i></div>
         <h3 class="card-title">View Users</h3>
       </a>
@@ -39,12 +39,12 @@
         <h3 class="card-title">Register Users</h3>
       </a>
 
-      <a href="#" class="card card-3">
+      <a href="{{route('users.search')}}" class="card card-3">
         <div class="card-icon"><i class="fas fa-edit"></i></div>
         <h3 class="card-title">Update Users</h3>
       </a>
 
-      <a href="#" class="card card-4">
+      <a href="{{route('users.delete.page')}}" class="card card-4">
         <div class="card-icon"><i class="fas fa-times"></i></div>
         <h3 class="card-title">Delete Users</h3>
       </a>

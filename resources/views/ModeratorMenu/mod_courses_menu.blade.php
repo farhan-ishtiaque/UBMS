@@ -29,22 +29,22 @@
 
     <!-- Card Section -->
     <div class="card-grid">
-      <a href="#" class="card card-1">
+      <a href="{{route('courses.index')}}" class="card card-1">
         <div class="card-icon"><i class="fas fa-eye"></i></div>
         <h3 class="card-title">View Courses</h3>
       </a>
 
-      <a href="#" class="card card-2">
+      <a href="{{route('courses.create')}}" class="card card-2">
         <div class="card-icon"><i class="fas fa-plus-circle"></i></div>
         <h3 class="card-title">Register Course</h3>
       </a>
 
-      <a href="#" class="card card-3">
+      <a href="{{route('courses.select')}}" class="card card-3">
         <div class="card-icon"><i class="fas fa-edit"></i></div>
         <h3 class="card-title">Update Course</h3>
       </a>
 
-      <a href="#" class="card card-4">
+      <a href="{{route('courses.list')}}" class="card card-4">
         <div class="card-icon"><i class="fas fa-times"></i></div>
         <h3 class="card-title">Delete Course</h3>
       </a>

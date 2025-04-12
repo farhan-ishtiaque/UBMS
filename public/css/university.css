@@ -1,87 +1,71 @@
-/* resources/css/app.css */
-
-/* Custom styles */
+/* Custom styles for universities page */
 .table-responsive {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
-.status-badge {
+.table-hover tbody tr:hover {
+    background-color: rgba(13, 110, 253, 0.1);
+}
+
+
+.badge {
+    font-size: 0.85em;
+    font-weight: 500;
+    padding: 0.35em 0.65em;
+}
+
+.back-button {
     display: inline-flex;
     align-items: center;
-    padding: 0.25rem 0.625rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    background-color: rgba(255, 0, 0, 0.1);
+    transition: var(--transition);
+    text-decoration: none;
     font-weight: 500;
-    line-height: 1;
 }
 
-.status-badge.accredited {
-    background-color: #dcfce7;
-    color: #166534;
+.back-button:hover {
+    background-color: rgba(0, 51, 255, 0.2);
+    text-decoration: none;
+    color: var(--secondary-color);
+    transform: translateY(-1px);
 }
 
-/* Additional custom styles for the universities page */
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin-right: auto;
-    margin-left: auto;
-    padding: 1rem;
-}
-
-h1 {
-    font-size: 1.875rem;
-    font-weight: 700;
-    color: #2563eb;
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-.table {
-    width: 100%;
-    min-width: 100%;
-    background-color: #fff;
-    border: 1px solid #d1d5db;
+.card {
     border-radius: 0.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    border-collapse: collapse;
+    overflow: hidden;
 }
 
-.table th, 
+.card-header {
+    padding: 1.25rem 1.5rem;
+}
+
+.table th {
+    white-space: nowrap;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: #fff;
+    background-color: #0d6efd;
+}
+
 .table td {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #d1d5db;
-    text-align: left;
+    vertical-align: middle;
 }
 
-.table thead {
-    background-color: #3b82f6;
-    color: white;
-}
-
-.table tr:hover {
-    background-color: #dbeafe;
-}
-
-.text-gray-600 {
-    color: #4b5563;
-}
-
-.text-blue-800 {
-    color: #1e40af;
-}
-
-/* Bootstrap overrides */
-.table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(0, 0, 0, 0.02);
-}
-
-.table-striped tbody tr:hover:nth-of-type(odd) {
-    background-color: #dbeafe;
-}
-
-.alert-warning {
-    background-color: #fffbeb;
-    border-color: #fde68a;
-    color: #92400e;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .table td, .table th {
+        padding: 0.75rem 0.5rem;
+    }
 }

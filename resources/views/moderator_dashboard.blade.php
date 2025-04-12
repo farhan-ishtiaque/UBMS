@@ -24,9 +24,9 @@
       <li class="menu-item"><a href="{{route('mod_courses_menu')}}" class="menu-link"><i class="fas fa-book"></i>  Courses</a></li>
       <li class="menu-item"><a href="{{route('mod_jobposting_menu')}}" class="menu-link"><i class="fas fa-briefcase"></i>  Job Postings</a></li>
       <li class="menu-item"><a href="{{route('mod_facultyrecruitment_menu')}}" class="menu-link"><i class="fas fa-user-tie"></i>  Faculty Recruitment</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-trophy"></i>  Rankings</a></li>
+      <!--<li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-trophy"></i>  Rankings</a></li> -->
       <li class="menu-item"><a href="{{route('mod_facultydevelopment_menu')}}" class="menu-link"><i class="fas fa-chalkboard"></i>  Faculty Development</a></li>
-      <li class="menu-item"><a href="{{route('mod_unifunding_menu')}}" class="menu-link"><i class="fas fa-money-check-alt"></i>  University Fundings</a></li>
+      <!--<li class="menu-item"><a href="{{route('mod_unifunding_menu')}}" class="menu-link"><i class="fas fa-money-check-alt"></i>  University Fundings</a></li>-->
     </ul>
   </aside>
 

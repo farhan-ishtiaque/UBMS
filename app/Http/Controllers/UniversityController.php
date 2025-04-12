@@ -11,11 +11,17 @@ class UniversityController extends Controller
 {
     public function showAccredited()
     {
-        $universities = University::where('accreditation_status', 'accredited')
-            ->select('uni_name', 'district', 'email_address', 'phone_number')
-            ->get();
+        $accreditedUniversities = University::accredited()
+            ->withCount('departments')
+            ->with([
+                'departments' => function ($query) {
+                    $query->orderBy('dept_name');
+                }
+            ])
+            ->orderBy('uni_name')
+            ->paginate(10);
 
-        return view('universities', compact('universities'));
+        return view('universities', compact('accreditedUniversities'));
     }
 
     public function showRegistrationForm()
@@ -48,11 +54,9 @@ class UniversityController extends Controller
         }
 
         try {
-            // Prepare data for saving
             $data = $request->except(['_token', 'acceptConditions']);
-            $data['accredited'] = false; // Set accredited status to false
+            $data['accreditation_status'] = 'Not Accredited'; // Default status
 
-            // Save to the universities table
             University::create($data);
 
             return redirect()->route('university.registration')->with('success', 'Registration successful!');
@@ -61,44 +65,31 @@ class UniversityController extends Controller
             return back()->with('error', 'Registration failed. Please try again.')->withInput();
         }
     }
-    public function showUpdateForm(Request $request)
-{
-    $universities = University::where('accreditation_status', 'Not Accredited')->get();
-    $selectedUniversityId = $request->input('universityId');
-    $university = null;
 
-    if ($selectedUniversityId) {
-        $university = University::find($selectedUniversityId);
+    public function showUpdateForm(Request $request)
+    {
+        $universities = University::orderBy('uni_name')->get();
+        $selectedUniversityId = $request->input('universityId');
+        $university = null;
+
+        if ($selectedUniversityId) {
+            $university = University::findOrFail($selectedUniversityId);
+        }
+
+        return view('universityUpdate', compact('universities', 'university'));
     }
 
-    return view('universityUpdate', [
-        'universities' => $universities,
-        'university' => $university
-    ]);
-}
+    public function updateAccreditation(Request $request, University $university)
+    {
+        $request->validate([
+            'accreditation_status' => 'required|in:Accredited,Not Accredited',
+        ]);
 
-public function updateAccreditation(Request $request, $id)
-{
-    $request->validate([
-        'accreditation_status' => 'required|in:Accredited,Not Accredited',
-    ]);
+        $university->update([
+            'accreditation_status' => $request->accreditation_status
+        ]);
 
-    $university = University::findOrFail($id);
-    $university->accreditation_status = $request->accreditation_status;
-    $university->save();
-
-    return redirect()->route('homepage')->with('success', 'University accredited successfully.');
-}
-
-
-//Function Asfiya
-     /*public function showAccredited()
-     {
-         // Fetch universities where accreditation_status is 'accredited'
-         $accreditedUniversities = University::where('accreditation_status', 'accredited')->get();
-     
-         // Return them to a view (e.g., accreditedUniversities.blade.php)
-         return view('universities', compact('accreditedUniversities'));
-     }*/
-
+        return redirect()->route('universities.update')
+            ->with('status', 'University accreditation updated successfully.');
+    }
 }

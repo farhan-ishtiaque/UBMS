@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container">
+    <a href="{{ route('mod_courses_menu') }}" class="btn btn-outline-secondary mb-4">
+        <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+    </a>
     <h2>Update Courses</h2>
 
     <form method="GET" action="{{ route('courses.select') }}">
@@ -38,9 +41,8 @@
             <thead>
                 <tr>
                     <th>Course Name</th>
+                    <th>Course Code</th>
                     <th>Credits</th>
-                    <th>Semester</th>
-                    <th>Year</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -48,9 +50,8 @@
                 @foreach($courses as $course)
                 <tr>
                     <td>{{ $course->course_name }}</td>
+                    <td>{{ $course->course_code }}</td>
                     <td>{{ $course->credits }}</td>
-                    <td>{{ $course->semester }}</td>
-                    <td>{{ $course->year }}</td>
                     <td>
                         <a href="{{ route('courses.edit', $course->course_id) }}" class="btn btn-sm btn-primary">Edit</a>
                     </td>

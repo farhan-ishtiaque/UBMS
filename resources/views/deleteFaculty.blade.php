@@ -8,6 +8,11 @@
 
 @section('content')
     <div class="container">
+        <!-- Back Button -->
+        <div class="mb-3">
+            <a href="{{ route('mod_faculties_menu') }}" class="btn btn-dark btn-sm">← Back to Menu</a>
+        </div>
+
         <h2>Delete Faculty</h2>
 
         @if(session('status'))

@@ -5,7 +5,7 @@ use App\Models\University;
 use App\Models\Faculties;
 use App\Models\FacultyPhone;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class FacultyController extends Controller
 {
@@ -44,18 +44,27 @@ class FacultyController extends Controller
 
         return redirect()->route('faculties.create')->with('success', 'Faculty created successfully.');
     }
-    public function showFaculties()
-    {
-        // Perform the query with the correct column name 'dept_id'
-        $faculties = \DB::table('faculties')
-            ->join('departments', 'faculties.dept_id', '=', 'departments.dept_id')  // Corrected column names for join
-            ->join('universities', 'departments.uni_id', '=', 'universities.uni_id')
-            ->select('faculties.faculty_id', 'faculties.first_name', 'faculties.last_name', 
-                     'faculties.designation', 'faculties.qualification', 'universities.uni_name', 'departments..dept_name')
-            ->paginate(10);  // Paginate the results
+    // In showFaculties() method, fix the typo in select statement:
+public function showFaculties()
+{
+    $faculties = DB::table('faculties')
+    ->join('universities', 'faculties.uni_id', '=', 'universities.uni_id')
+    ->join('departments', 'faculties.dept_id', '=', 'departments.dept_id')
+    ->select(
+        'faculties.faculty_id',
+        'faculties.first_name',
+        'faculties.last_name',
+        'faculties.email',
+        'faculties.designation',
+        'faculties.qualification',
+        'universities.uni_name',
+        'departments.dept_name'
+    )
+    ->paginate(10);
+
     
-        return view('faculties', compact('faculties'));
-    }
+    return view('faculties', compact('faculties'));
+}
     
     public function editFaculty($id)
 {

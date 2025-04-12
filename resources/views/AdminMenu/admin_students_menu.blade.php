@@ -22,32 +22,43 @@
     <!-- Page Header -->
     <div class="header">
       <h2 class="page-title">Student Management</h2>
-      <a href="{{ route('moderator.dashboard') }}" class="back-button">
+      <a href="{{ route('uniAdmin.dashboard') }}" class="back-button">
         <i class="fas fa-arrow-left"></i> Back
       </a>
     </div>
 
     <!-- Card Section -->
     <div class="card-grid">
-      <a href="#" class="card card-1">
+      <a href="{{route('admin_view_students')}}" class="card card-1">
         <div class="card-icon"><i class="fas fa-eye"></i></div>
         <h3 class="card-title">View Students</h3>
       </a>
 
-      <a href="#" class="card card-2">
+      <a href="{{route('admin_add_students')}}" class="card card-2">
         <div class="card-icon"><i class="fas fa-plus-circle"></i></div>
         <h3 class="card-title">Register Student</h3>
       </a>
 
-      <a href="#" class="card card-3">
+      <a href="{{route('admin_update_students')}}" class="card card-3">
         <div class="card-icon"><i class="fas fa-edit"></i></div>
         <h3 class="card-title">Update Student</h3>
       </a>
 
-      <a href="#" class="card card-4">
+      <a href="{{route('admin_delete_students')}}" class="card card-4">
         <div class="card-icon"><i class="fas fa-times"></i></div>
         <h3 class="card-title">Delete Student</h3>
       </a>
+
+      a href="{{route('admin_students_transcript')}}" class="card card-4">
+        <div class="card-icon"><i class="fas fa-file-alt"></i></div>
+        <h3 class="card-title">Student Transcript</h3>
+      </a>
+
+      <a href="{{route('admin_update_scholarships')}}" class="card card-4">
+        <div class="card-icon"><i class="fas fa-pen-to-square"></i></div>
+        <h3 class="card-title">Update Scholarship</h3>
+      </a>
+
     </div>
   </main>
 </body>

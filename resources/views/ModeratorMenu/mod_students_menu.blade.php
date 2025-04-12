@@ -26,7 +26,7 @@
         <i class="fas fa-arrow-left"></i> Back
       </a>
     </div>
-
+    
     <!-- Card Section -->
     <div class="card-grid">
       <a href="{{route('mod_view_students')}}" class="card card-1">
