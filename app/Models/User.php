@@ -10,7 +10,10 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $table = 'users'; // Explicitly set table name
+    protected $table = 'users';
+    
+    // Add this line to specify your primary key if it's not 'id'
+    protected $primaryKey = 'user_id'; // or whatever your primary key is called
 
     protected $fillable = [
         'FirstName',
@@ -19,17 +22,20 @@ class User extends Authenticatable
         'email',
         'password',
         'type',
-        // 'university_id' - uncomment when you add this field
+        'uni_id'
     ];
 
     protected $hidden = [
         'password',
-        'remember_token', // Add this if using remember token functionality
+        'remember_token',
     ];
 
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // ... rest of your model code ...
+
 
     // Relationship to University (for university admins)
     public function university()

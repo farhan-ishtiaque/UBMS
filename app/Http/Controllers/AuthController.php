@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UniversityAdmin;
+use App\Models\University;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,11 +17,10 @@ class AuthController extends Controller
     }
 
     public function registration()
-{
-    $universities = \App\Models\University::all(); // assuming you have a University model
-    return view('registration', compact('universities'));
-}
-
+    {
+        $universities = University::all();
+        return view('registration', compact('universities'));
+    }
 
     public function loginPost(Request $request)
     {
@@ -29,8 +29,27 @@ class AuthController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        if (auth()->attempt($request->only('email', 'password'))) {
-            return redirect()->intended(route('moderator.dashboard'))->with('success', 'Login successful');
+        $credentials = $request->only('email', 'password');
+
+        if (auth()->attempt($credentials)) {
+            $user = auth()->user();
+
+            // Handle redirection based on user type
+            switch ($user->type) {
+                case 'moderators':
+                    return redirect()->route('moderator.dashboard');
+                
+                case 'umsb_personnel':
+                    return redirect()->route('ubms.dashboard');
+                
+                case 'university_admin':
+                    session(['uni_id' => $user->uni_id]);
+                    return redirect()->route('uniAdmin.dashboard');
+                
+                default:
+                    auth()->logout();
+                    return redirect()->route('login')->with('error', 'Unauthorized user type.');
+            }
         }
 
         return redirect()->back()
@@ -40,8 +59,8 @@ class AuthController extends Controller
 
     public function registrationPost(Request $request)
     {
-        if ($request->has('FirstName') && $request->has('LastName')) {
-            // Manual Registration
+        if ($request->input('registration_type') === 'manual') {
+            // Manual Registration for UMSB personnel
             $request->validate([
                 'FirstName' => 'required|string|max:255',
                 'LastName' => 'required|string|max:255',
@@ -50,37 +69,54 @@ class AuthController extends Controller
                 'password' => 'required|min:6|confirmed',
             ]);
 
-            $user = new User();
-            $user->FirstName = $request->input('FirstName');
-            $user->LastName = $request->input('LastName');
-            $user->email = $request->input('email');
-            $user->password = bcrypt($request->input('password'));
-            $user->type = 'umsb_personnel';
-            $user->phoneNumber = $request->input('PhoneNumber');
-            $user->save();
+            $user = User::create([
+                'FirstName' => $request->input('FirstName'),
+                'LastName' => $request->input('LastName'),
+                'PhoneNumber' => $request->input('PhoneNumber'),
+                'email' => $request->input('email'),
+                'password' => bcrypt($request->input('password')),
+                'type' => 'umsb_personnel',
+            ]);
 
-            return redirect()->route('homepage')->with('success', 'Registration successful. Please log in.');
-        } elseif ($request->has('university') && $request->has('uniAdmin')) {
-            // University Registration
-            $universityAdmin = UniversityAdmin::find($request->input('uniAdmin'));
+            Auth::login($user);
+            return redirect()->route('ubms.dashboard')->with('success', 'Registration successful!');
+            
+        } elseif ($request->input('registration_type') === 'university') {
+            // University Admin Registration
+            $request->validate([
+                'uni_id' => 'required|exists:universities,uni_id',
+                'admin_id' => 'required|exists:university_admins,admin_id',
+            ]);
 
-            if (!$universityAdmin) {
-                return redirect()->back()->withErrors(['uniAdmin' => 'Selected university admin not found.']);
+            $universityAdmin = UniversityAdmin::find($request->input('admin_id'));
+
+            // Check if this admin already has a user account
+            $existingUser = User::where('email', $universityAdmin->email_address)->first();
+            if ($existingUser) {
+                return redirect()->back()->withErrors(['email' => 'This university admin already has an account.']);
             }
 
-            $user = new User();
-            $user->FirstName = $universityAdmin->first_name;
-            $user->LastName = $universityAdmin->last_name;
-            $user->email = $universityAdmin->email;
-            $user->password = bcrypt('password');
-            $user->type = 'university_admin';
-            $user->PhoneNumber = $universityAdmin->phone_number;
-            $user->save();
+            $user = User::create([
+                'FirstName' => $universityAdmin->first_name,
+                'LastName' => $universityAdmin->last_name,
+                'PhoneNumber' => $universityAdmin->phone_number,
+                'email' => $universityAdmin->email_address,
+                'password' => bcrypt('defaultpassword'), // Set a default password
+                'type' => 'university_admin',
+                'uni_id' => $universityAdmin->uni_id,
+            ]);
 
-            return redirect()->route('login')->with('success', 'Registration successful. Please log in.');
+            Auth::login($user);
+            return redirect()->route('login')->with('success', 'University admin registration successful!');
         }
 
         return redirect()->back()->withErrors(['registration' => 'Invalid registration data.']);
+    }
+
+    public function getUniversityAdmins(Request $request)
+    {
+        $admins = UniversityAdmin::where('uni_id', $request->uni_id)->get();
+        return response()->json($admins);
     }
 
     function logout()
@@ -88,6 +124,4 @@ class AuthController extends Controller
         auth()->logout();
         return redirect()->route('homepage')->with('success', 'Logged out successfully');
     }
-
-
 }

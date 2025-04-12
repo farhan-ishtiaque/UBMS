@@ -1,64 +1,149 @@
 /* Registration Page Styles */
 body {
     background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #212529;
 }
 
 .card {
     border: none;
     overflow: hidden;
+    transition: all 0.3s ease;
 }
 
+.card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Form outline styling */
 .form-outline {
     position: relative;
+    margin-bottom: 1.5rem;
 }
 
+/* Input and select styling */
 .form-outline input,
 .form-outline select {
-    padding: 10px 15px;
+    padding: 12px 15px;
     border-radius: 8px;
     border: 1px solid #ddd;
     transition: all 0.3s;
+    width: 100%;
+    font-size: 16px;
+    color: #495057;
+    background-color: white;
 }
 
+/* DROPDOWN FIXES - Critical changes for select visibility */
+select.form-control {
+    -webkit-appearance: menulist !important;
+    -moz-appearance: menulist !important;
+    appearance: menulist !important;
+    background-image: none !important;
+    color: #495057 !important;
+    background-color: white !important;
+    padding-right: 15px !important;
+}
+
+select.form-control option {
+    color: #495057 !important;
+    background-color: white !important;
+    padding: 8px 12px;
+}
+
+/* Focus states */
 .form-outline input:focus,
 .form-outline select:focus {
     border-color: #3498db;
     box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+    outline: none;
 }
 
+/* Floating labels */
 .form-outline label {
     position: absolute;
-    top: 10px;
+    top: 12px;
     left: 15px;
     color: #999;
     transition: all 0.3s;
     pointer-events: none;
+    font-size: 16px;
+    background-color: transparent;
 }
 
 .form-outline input:focus + label,
 .form-outline input:not(:placeholder-shown) + label,
 .form-outline select:focus + label,
-.form-outline select:not(:placeholder-shown) + label {
+.form-outline select:not([value=""]) + label {
     top: -10px;
     left: 10px;
     font-size: 12px;
-    background: white;
+    background-color: white;
     padding: 0 5px;
     color: #3498db;
 }
 
+/* Button styling */
 .btn-primary {
     background-color: #3498db;
     border: none;
-    padding: 10px 25px;
+    padding: 12px 30px;
     font-weight: 600;
     transition: all 0.3s;
+    border-radius: 8px;
+    font-size: 16px;
+    color: white;
 }
 
 .btn-primary:hover {
     background-color: #2980b9;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+.btn-outline-primary {
+    color: #3498db;
+    border-color: #3498db;
+    padding: 10px 20px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary.active {
+    background-color: #3498db;
+    color: white;
+}
+
+/* Form switching animation */
+#manualRegisterForm,
+#universityRegisterForm {
+    transition: all 0.5s ease;
+}
+
+/* Terms checkbox styling */
+.form-check-input:checked {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+/* Error message styling */
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 14px;
+}
+
+/* Link styling */
+a {
+    color: #3498db;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+a:hover {
+    color: #2980b9;
+    text-decoration: underline;
 }
 
 /* Responsive adjustments */
@@ -79,26 +164,51 @@ body {
     
     .form-outline input,
     .form-outline select {
-        padding: 8px 12px;
+        padding: 10px 12px;
+    }
+    
+    .btn-primary {
+        padding: 10px 20px;
     }
 }
 
-/* Additional styles for buttons */
-.btn-outline-primary {
-    color: #3498db;
-    border-color: #3498db;
+/* Dark mode compatibility */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #212529;
+        color: #f8f9fa;
+    }
+    
+    .card {
+        background-color: #2c3034;
+        color: #f8f9fa;
+    }
+    
+    .form-outline input,
+    .form-outline select,
+    select.form-control,
+    select.form-control option {
+        color: #f8f9fa !important;
+        background-color: #343a40 !important;
+        border-color: #495057;
+    }
+    
+    .form-outline label {
+        color: #adb5bd;
+    }
+    
+    .form-outline input:focus + label,
+    .form-outline input:not(:placeholder-shown) + label,
+    .form-outline select:focus + label,
+    .form-outline select:not([value=""]) + label {
+        background-color: #343a40;
+        color: #3498db;
+    }
 }
 
-.btn-outline-primary:hover {
-    background-color: #3498db;
-    color: white;
-}
-
-/* Footer styles */
-footer {
-    background-color: #3498db;
-}
-
-footer .text-white {
-    color: white !important;
+/* Browser-specific fixes */
+@-moz-document url-prefix() {
+    select.form-control {
+        padding: 12px 15px !important;
+    }
 }

@@ -22,4 +22,6 @@ class FacultyPhone extends Model
         // Return the view 'faculties.blade.php' which will display all faculties
         return view('faculties', compact('faculties'));
     }
+
 }
+

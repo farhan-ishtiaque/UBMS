@@ -1,13 +1,23 @@
 <?php
+
 namespace App\Http\Controllers;
 
+use App\Models\University;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\University; // Assuming your model is named University
 use Illuminate\Support\Facades\Log;
 
 class UniversityController extends Controller
 {
+    public function showAccredited()
+    {
+        $universities = University::where('accreditation_status', 'accredited')
+            ->select('uni_name', 'district', 'email_address', 'phone_number')
+            ->get();
+
+        return view('universities', compact('universities'));
+    }
+
     public function showRegistrationForm()
     {
         return view('uniRegistration');
@@ -80,13 +90,15 @@ public function updateAccreditation(Request $request, $id)
     return redirect()->route('homepage')->with('success', 'University accredited successfully.');
 }
 
-     public function showAccredited()
+
+//Function Asfiya
+     /*public function showAccredited()
      {
          // Fetch universities where accreditation_status is 'accredited'
          $accreditedUniversities = University::where('accreditation_status', 'accredited')->get();
      
          // Return them to a view (e.g., accreditedUniversities.blade.php)
          return view('universities', compact('accreditedUniversities'));
-     }
-     
+     }*/
+
 }
