@@ -33,4 +33,9 @@ class Departments extends Model
     {
         return $this->hasMany(JobPostings::class, 'dept_id');
     }
+    
+    public function facultyDevelopments()
+    {
+        return $this->hasMany(FacultyDevelopment::class, 'dept_id');
+    }
 }

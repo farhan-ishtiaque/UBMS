@@ -19,4 +19,11 @@ class Courses extends Model
         return $this->belongsToMany(Students::class, 'enrollment')
                     ->withPivot('attendance', 'grade', 'semester', 'year');
     }
+ 
+public function faculties()
+{
+    return $this->belongsToMany(Faculty::class, 'course_faculty')
+                ->withPivot(['semester', 'is_primary_instructor'])
+                ->withTimestamps();
+}
 }

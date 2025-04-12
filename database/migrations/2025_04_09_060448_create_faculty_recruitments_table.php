@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('faculty_recruitments', function (Blueprint $table) {
             $table->id('recruitment_id');
-            $table->unsignedBigInteger('faculty_id');
             $table->unsignedBigInteger('job_id');
-            $table->date('application_date');
-            $table->date('interview_date')->nullable();
-            $table->date('hire_date')->nullable();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('middle_name');
+            $table->string('designation');
+            $table->string('email')->unique();
+            $table->string('qualification');
+            $table->string('teaching_experience');
             $table->enum('recruitment_status', ['Declined', 'Waiting', 'Approved']);
             $table->timestamps();
-        
-            $table->foreign('faculty_id')->references('faculty_id')->on('faculties')->onDelete('cascade');
             $table->foreign('job_id')->references('job_id')->on('job_postings')->onDelete('cascade');
         });
         

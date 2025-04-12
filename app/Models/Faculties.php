@@ -9,7 +9,7 @@ class Faculties extends Model
 
     protected $fillable = [
         'dept_id', 'uni_id', 'first_name', 'middle_name', 'last_name',
-        'designation', 'qualification', 'teaching_experience'
+        'designation','email', 'qualification', 'teaching_experience'
     ];
 
     public function department()
@@ -35,6 +35,12 @@ class Faculties extends Model
     public function phones()
     {
         return $this->hasMany(FacultyPhone::class);
+    }
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'course_faculty')
+                    ->withPivot(['semester', 'is_primary_instructor'])
+                    ->withTimestamps();
     }
 
 }

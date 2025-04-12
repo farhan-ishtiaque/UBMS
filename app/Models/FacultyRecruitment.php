@@ -8,7 +8,8 @@ class FacultyRecruitment extends Model
     protected $primaryKey = 'recruitment_id';
 
     protected $fillable = [
-        'job_id', 'application_date', 'interview_date', 'recruitment_status', 'hire_date'
+        'job_id',  'recruitment_status','first_name', 'middle_name', 'last_name',
+        'designation','email', 'qualification', 'teaching_experience'
     ];
 
     public function jobPosting()

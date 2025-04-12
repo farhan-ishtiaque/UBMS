@@ -11,26 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('faculty_developments', function (Blueprint $table) {
-            $table->id('development_id');
-            $table->unsignedBigInteger('faculty_id');
-            $table->string('program_name');
-            $table->string('program_type');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->string('status');
-            $table->timestamps();
-        
-            $table->foreign('faculty_id')->references('faculty_id')->on('faculties')->onDelete('cascade');
-        });
-        
+      // In your migration file
+Schema::create('faculty_developments', function (Blueprint $table) {
+    $table->id('development_id');
+    $table->unsignedBigInteger('dept_id'); // Foreign key to departments
+    $table->string('program_name');
+    $table->string('program_type');
+    $table->date('start_date');
+    $table->date('end_date');
+    $table->timestamps();
+    
+    $table->foreign('dept_id')->references('dept_id')->on('departments')->onDelete('cascade');
+});
     }
+// Remove the pivot table creation if it exists
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('faculty_developments');
-    }
+    
+
 };

@@ -32,6 +32,7 @@
                         <td>{{ $faculty->qualification }}</td>
                         <td>{{ $faculty->uni_name }}</td> <!-- Display university name -->
                         <td>{{ $faculty->dept_name }}</td> <!-- Display department -->
+                   
                     </tr>
                 @endforeach
             </tbody>

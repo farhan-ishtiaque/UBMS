@@ -10,8 +10,8 @@ use Illuminate\Http\Request;
 class FacultyController extends Controller
 {
     public function create()
-    {
-        return view('create');
+    {$universities = University::all(); // Make sure to import the University model at the top
+        return view('create', compact('universities'));
     }
 
     public function store(Request $request)
@@ -23,6 +23,7 @@ class FacultyController extends Controller
             'middle_name' => 'nullable|string|max:255',
             'last_name' => 'required|string|max:255',
             'designation' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
             'qualification' => 'required|string|max:255',
             'teaching_experience' => 'nullable|integer',
             'phone_numbers.*' => 'nullable|string|max:20'

@@ -7,6 +7,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\UniRegistrationController;
+use App\Http\Controllers\RecruitmentController;
+
 
 // Homepage Route
 Route::get('/', function () {
@@ -98,4 +100,31 @@ Route::get('courses/{id}/delete', [CoursesController::class, 'confirmDelete'])->
 // Actual Delete Route
 Route::delete('courses/{id}', [CoursesController::class, 'delete'])->name('courses.delete');
 
+use App\Http\Controllers\JobPostingsController;
 
+// Show the form
+Route::get('/job-postings/create', [JobPostingsController::class, 'create'])->name('job_postings.create');
+
+Route::post('/job-postings', [JobPostingsController::class, 'store'])->name('job-postings.store');
+Route::get('/job-postings/list', [JobPostingsController::class, 'index'])->name('job-postings.index');
+use App\Http\Controllers\FacultyRecruitmentController;
+Route::get('/faculty-recruitment/create/{job_id}', [FacultyRecruitmentController::class, 'create'])->name('faculty-recruitment.create');
+Route::post('/faculty-recruitment/store', [FacultyRecruitmentController::class, 'store'])->name('faculty-recruitment.store');
+Route::get('/update-status', [RecruitmentController::class, 'showUpdateForm'])->name('update-status');
+Route::post('/update-status/save', [RecruitmentController::class, 'saveStatusUpdates'])->name('update-status.save');
+
+use App\Http\Controllers\FacultyDevelopmentController;
+
+Route::get('/faculty-development/create', [FacultyDevelopmentController::class, 'create'])->name('faculty_development.create');
+Route::post('/faculty-development', [FacultyDevelopmentController::class, 'store'])->name('faculty_development.store');
+Route::get('/faculty-development', [FacultyDevelopmentController::class, 'index'])->name('faculty_development.index');
+Route::prefix('faculty/{faculty}')->group(function () {
+    Route::get('/assign-courses', [FacultyCourseAssignmentController::class, 'create'])
+         ->name('faculty.assign-courses.create');
+         
+    Route::post('/assign-courses', [FacultyCourseAssignmentController::class, 'store'])
+         ->name('faculty.assign-courses.store');
+         
+    Route::delete('/assign-courses/{course}', [FacultyCourseAssignmentController::class, 'destroy'])
+         ->name('faculty.assign-courses.destroy');
+});
