@@ -1,0 +1,92 @@
+/* General page background */
+body {
+    background-color: #e6f2ff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Centered container with white background and shadow */
+.form-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.1);
+    margin-top: 50px;
+}
+
+/* Form headings */
+.form-container h2 {
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Form labels */
+label.form-label {
+    font-weight: 600;
+    color: #333333;
+}
+
+/* Input fields */
+input.form-control, select.form-control {
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    font-size: 15px;
+}
+
+/* Input fields focus effect */
+input.form-control:focus, select.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+}
+
+/* Blue buttons */
+.btn-blue {
+    background-color: #007bff;
+    color: white;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-blue:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+/* Submit button */
+button[type="submit"] {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 0;
+}
+
+/* Alert box */
+.alert-success {
+    background-color: #d4edda;
+    border-left: 6px solid #28a745;
+    color: #155724;
+    font-weight: 500;
+}
+
+/* Phone number input group spacing */
+.input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.input-group .form-control {
+    flex-grow: 1;
+}
+
+/* Remove button for phone */
+.remove-phone {
+    border: none;
+    background-color: #dc3545;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.remove-phone:hover {
+    background-color: #bd2130;
+}

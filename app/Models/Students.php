@@ -9,6 +9,7 @@ class Students extends Model
     protected $primaryKey = 'student_id';
 
     protected $fillable = [
+
         'uni_id',
         'dept_id',
         'first_name',
@@ -21,6 +22,7 @@ class Students extends Model
         'date_of_birth',
         'cgpa',
         'graduation_status'
+
     ];
     
 

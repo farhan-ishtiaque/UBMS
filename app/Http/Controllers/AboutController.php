@@ -25,10 +25,10 @@ class AboutController extends Controller
                 'linkedin' => 'https://www.linkedin.com/in/asfiya-chowdhury?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
             ],
             [
-                'name' => 'Professor Dr. Minhaj Rafi',
+                'name' => 'Professor Dr. Nazmul Alam Diptu',
                 'from' => '2016',
                 'to' => '2021',
-                'linkedin' => 'https://www.linkedin.com/in/minhaj-rafi-837414314?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
+                'linkedin' => 'https://www.linkedin.com/in/diptu?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
             ],
             [
                 'name' => 'Professor Dr. Ahmed Kiser',

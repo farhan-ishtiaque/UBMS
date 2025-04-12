@@ -12,7 +12,7 @@
     <div class="container mt-5">
         <h1 class="text-primary mb-4 text-center">List of Accredited Universities</h1> <!-- Centered Title -->
 
-        @if($universities->isEmpty())
+        @if($accreditedUniversities->isEmpty())
             <div class="alert alert-warning" role="alert">
                 No accredited universities found.
             </div>
@@ -28,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($universities as $university)
+                    @foreach($accreditedUniversities as $university)
                             <tr>
                                 <td>{{ $university->uni_name }}</td>
                                 <td>{{ $university->district }}</td>

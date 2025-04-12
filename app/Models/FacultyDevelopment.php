@@ -7,10 +7,10 @@ class FacultyDevelopment extends Model
 {
     protected $primaryKey = 'development_id';
 
-    protected $fillable = ['program_name', 'program_type', 'start_date', 'end_date', 'status'];
-
-    public function faculties()
+    // Remove 'dept_id' from fillable since it's handled in pivot
+    protected $fillable = ['dept_id','program_name', 'program_type', 'start_date', 'end_date'];
+    public function department()
     {
-        return $this->belongsToMany(Faculties::class, 'faculty_development_faculty');
+        return $this->belongsTo(Departments::class, 'dept_id');
     }
 }

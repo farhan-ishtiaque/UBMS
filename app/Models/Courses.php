@@ -26,4 +26,11 @@ class Courses extends Model
                     ->withPivot('semester', 'year', 'grade')
                     ->withTimestamps();
     }
+ 
+public function faculties()
+{
+    return $this->belongsToMany(Faculty::class, 'course_faculty')
+                ->withPivot(['semester', 'is_primary_instructor'])
+                ->withTimestamps();
+}
 }

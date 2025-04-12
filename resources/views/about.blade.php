@@ -42,7 +42,7 @@
     <td>2011</td>
     <td>2015</td>
 </tr>
-<tr><td onclick="window.open('https://www.linkedin.com/in/minhaj-rafi-837414314?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', '_blank')" style="cursor: pointer;">Professor Dr. Minhaj Rafi</td>
+<tr><td onclick="window.open('https://www.linkedin.com/in/diptu?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', '_blank')" style="cursor: pointer;">Professor Dr. Nazmul Alam Diptu</td>
                         <td>2016 - 2021</td>
                         <td>2016</td>
                         <td>2021</td>
@@ -57,8 +57,6 @@
         </div>
     </div>
 </div>
-
-        <!-- Standing Committees -->
         <div class="dropdown">
             <div class="dropdown-header" onclick="toggleDropdown('committees')">
                 <span>Accreditation  Criteria</span>

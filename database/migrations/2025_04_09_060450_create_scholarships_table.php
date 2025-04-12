@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('scholarships', function (Blueprint $table) { 
             $table->id('scholarship_id'); // Primary key
+
             $table->unsignedBigInteger('student_id'); // Foreign key referencing universities
             $table->string('amount'); // amount of aid
             $table->enum('status', ['Recepient','Revoked']);
@@ -22,6 +23,7 @@ return new class extends Migration
             
             // Foreign key constraint
             $table->foreign('student_id')->references('student_id')->on('students')->onDelete('cascade');
+
         });
         
     }

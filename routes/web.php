@@ -41,6 +41,14 @@ use App\Http\Controllers\ModeratorMenu\StudentMenu\StudentMenuViewController;
 use App\Http\Controllers\ModeratorMenu\StudentMenu\StudentMenuDeleteController;
 use App\Http\Controllers\ModeratorMenu\StudentMenu\StudentMenuUpdateController;
 use App\Http\Controllers\ModeratorMenu\StudentMenu\StudentMenuTranscriptController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\FacultyController;
+use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\DepartmentsController;
+use App\Http\Controllers\JobPostingsController;
+use App\Http\Controllers\FacultyRecruitmentController;
+use App\Http\Controllers\FacultyDevelopmentController;
+use App\Http\Controllers\FacultyCourseAssignmentController;
 
 // Homepage Route
 Route::get('/', function () {
@@ -65,6 +73,9 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 // dashboard data for cards
 Route::get('/dashboard-data', [ModeratorDashboardController::class, 'getDashboardData']);
+
+use App\Http\Controllers\UserController;
+
 Route::get('/dashboard-data2', [UniAdminDashboardController::class, 'getDashboardData']);
 Route::get('/dashboard-data3', [UmsbDashboardController::class, 'getDashboardData']);
 
@@ -168,6 +179,7 @@ Route::post('/logout', function () {
 
 
 use App\Http\Controllers\UserController;
+
 // Show all users
 Route::get('/users', [UserController::class, 'showUsers'])->name('users.list');
 

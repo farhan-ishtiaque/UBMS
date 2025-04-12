@@ -91,7 +91,14 @@ public function updateAccreditation(Request $request, $id)
 }
 
 
-
-
+//Function Asfiya
+     /*public function showAccredited()
+     {
+         // Fetch universities where accreditation_status is 'accredited'
+         $accreditedUniversities = University::where('accreditation_status', 'accredited')->get();
+     
+         // Return them to a view (e.g., accreditedUniversities.blade.php)
+         return view('universities', compact('accreditedUniversities'));
+     }*/
 
 }

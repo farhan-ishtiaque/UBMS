@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('middle_name')->nullable(); // Optional field
             $table->string('last_name');
             $table->string('designation');
+
             $table->string('email')->unique(); // Unique email field
+
             $table->string('qualification');
             $table->integer('teaching_experience')->nullable(); // Optional field
             $table->timestamps(); // Created at and updated at timestamps
