@@ -41,8 +41,10 @@ class Faculties extends Model
 
     public function developmentPrograms()
     {
-        return $this->belongsToMany(FacultyDevelopment::class, 'faculty_development_faculty',
-                                   'faculty_id', 'program_id');
+
+        return $this->belongsToMany(Courses::class, 'course_faculty')
+                    ->withPivot(['semester', 'is_primary_instructor'])
+                    ->withTimestamps();
     }
 
     public function courses()

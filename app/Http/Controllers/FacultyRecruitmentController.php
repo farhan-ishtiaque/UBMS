@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers;
-
 use App\Models\Departments;
 use App\Models\Faculties;
 use App\Models\University;
@@ -12,7 +11,9 @@ class FacultyRecruitmentController extends Controller
 {
   public function create($job_id)
         {
-            return view('faculty_recruitment.create', ['job_id' => $job_id, 'departments' => Departments::all(), 'universities' => University::all()]);
+
+            return view('faculty_recruitment.create', ['job_id' => $job_id, 'departments' => Department::all(), 'universities' => University::all()]);
+
         }
         
     
@@ -51,6 +52,7 @@ class FacultyRecruitmentController extends Controller
         
 
         return redirect()->route('job-listings.index')->with('success', 'Application submitted!');
+
     }
 
     public function updateStatus($applicantId, Request $request)
@@ -93,5 +95,7 @@ class FacultyRecruitmentController extends Controller
         // Redirect to the job applicants page after status update
         return redirect()->route('job-listings.applicants', ['jobId' => $applicant->job_id])
                          ->with('success', 'Recruitment status updated successfully!');
+    }
+
 }
 }

@@ -112,6 +112,33 @@
                     <label for="last_name">Last Name</label>
                     <input type="text" id="last_name" name="last_name" required>
                 </div>
+                <div class="form-group">
+            <label for="uni_id">University</label>
+            <select name="uni_id" id="uni_id" class="form-control" required>
+                <option value="">Select University</option>
+                @foreach($universities as $university)
+                    <option value="{{ $university->uni_id }}" {{ old('uni_id') == $university->uni_id ? 'selected' : '' }}>
+                        {{ $university->name }}
+                    </option>
+                @endforeach
+            </select>
+            @error('uni_id')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+<div class="form-group">
+    <label for="dept_id">Department</label>
+    <select id="dept_id" name="dept_id" required>
+        @foreach($departments as $department)
+            <option value="{{ $department->id }}">{{ $department->name }}</option>
+        @endforeach
+    </select>
+</div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
 
                 <div class="form-group">
                     <label for="designation">Designation</label>
@@ -125,7 +152,8 @@
 
                 <div class="form-group">
                     <label for="experience">Teaching Experience (years)</label>
-                    <input type="number" id="experience" name="experience" min="0" required>
+                    <input type="number" id="teaching_experience" name="teaching_experience" value="{{ old('teaching_experience') }}"min="0" required>
+
                 </div>
             </div>
 
