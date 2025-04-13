@@ -55,7 +55,8 @@ class UserController extends Controller
             'FirstName' => 'required|string|max:255',
             'LastName' => 'required|string|max:255',
             'PhoneNumber' => 'required|string|max:15',
-            'email' => 'required|email|unique:users,email,' . $id,
+            'email' => 'required|email|unique:users,email,' . $id . ',user_id',
+
         ]);
 
         // Update the user data
@@ -66,25 +67,30 @@ class UserController extends Controller
         $user->save();
 
         // Redirect back to the user list with a success message
-        return redirect()->route('users.list')->with('success', 'User updated successfully'); // Change the redirect route
+        return redirect()->route('mod_users_menu')->with('success', 'User updated successfully'); // Change the redirect route
     }
     // Show confirmation page
-public function confirmDelete($id)
-{
-    $user = User::findOrFail($id);
-    return view('confirm-delete', compact('user')); // Loads confirm-delete.blade.php
-}
-
-// Perform deletion
-public function deleteUser($id)
+    public function confirmDelete($id)
+    {
+        $user = User::findOrFail($id);
+        return view('confirm-delete', compact('user'));
+    }
+    
+    public function deleteUser($id)
 {
     $user = User::findOrFail($id);
     $user->delete();
 
-    return redirect()->route('users.list')->with('success', 'User deleted successfully.');
+    return redirect()->route('users.delete.page')->with('success', 'User deleted successfully.');
 }
 // Page for deleting users (with search)
 public function showDeleteUsers(Request $request)
+{
+    $users = User::paginate(10);
+    return view('userDelete', compact('users'));
+}
+
+public function searchDeleteUsers(Request $request)
 {
     $query = User::query();
 
@@ -96,8 +102,8 @@ public function showDeleteUsers(Request $request)
     }
 
     $users = $query->paginate(10);
-
     return view('userDelete', compact('users'));
 }
+
 
 }

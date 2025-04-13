@@ -1,104 +1,114 @@
-/* Registration Page Styles */
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8f9fa;
+    color: #333;
 }
 
-.card {
-    border: none;
-    overflow: hidden;
-}
-
+/* Floating Label Fix (Bootstrap v5) */
 .form-outline {
     position: relative;
 }
 
-.form-outline input,
-.form-outline select {
-    padding: 10px 15px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    transition: all 0.3s;
-}
-
-.form-outline input:focus,
-.form-outline select:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
-}
-
-.form-outline label {
+.form-outline .form-label {
     position: absolute;
-    top: 10px;
-    left: 15px;
-    color: #999;
-    transition: all 0.3s;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    transition: all 0.2s;
     pointer-events: none;
+    background: #fff;
+    padding: 0 4px;
+    color: #6c757d;
 }
 
-.form-outline input:focus + label,
-.form-outline input:not(:placeholder-shown) + label,
-.form-outline select:focus + label,
-.form-outline select:not(:placeholder-shown) + label {
+.form-outline input:focus + .form-label,
+.form-outline input:not(:placeholder-shown) + .form-label,
+.form-outline select:focus + .form-label,
+.form-outline select:valid + .form-label {
     top: -10px;
-    left: 10px;
-    font-size: 12px;
-    background: white;
-    padding: 0 5px;
+    font-size: 0.8rem;
     color: #3498db;
 }
 
+/* Registration Buttons */
+.btn-outline-primary {
+    border: 2px solid #3498db;
+    color: #3498db;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary.active {
+    background-color: #3498db;
+    color: #fff;
+}
+
+/* Card Styling */
+.card {
+    border-radius: 25px;
+    border: none;
+    background-color: #ffffff;
+}
+
+.card-body {
+    padding: 3rem;
+}
+
+/* Image Section */
+.card img {
+    border-radius: 25px;
+}
+
+/* Terms Checkbox */
+.form-check-label a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.form-check-label a:hover {
+    text-decoration: underline;
+}
+
+/* Form Buttons */
 .btn-primary {
     background-color: #3498db;
     border: none;
-    padding: 10px 25px;
-    font-weight: 600;
-    transition: all 0.3s;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .btn-primary:hover {
     background-color: #2980b9;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive adjustments */
-@media (max-width: 992px) {
-    .order-1 {
-        margin-bottom: 30px;
-    }
-    
-    .card-body {
-        padding: 2rem !important;
-    }
-}
-
+/* Responsive Fixes */
 @media (max-width: 768px) {
-    .card {
-        border-radius: 15px !important;
+    .card-body {
+        padding: 2rem;
     }
-    
-    .form-outline input,
-    .form-outline select {
-        padding: 8px 12px;
+
+    .card img {
+        display: none;
     }
 }
 
-/* Additional styles for buttons */
-.btn-outline-primary {
-    color: #3498db;
-    border-color: #3498db;
+/* Dropdown Visibility Fix */
+select.form-control,
+select.form-control option {
+    background-color: #fff !important;
+    color: #333 !important;
 }
 
-.btn-outline-primary:hover {
-    background-color: #3498db;
-    color: white;
-}
-
-/* Footer styles */
-footer {
-    background-color: #3498db;
-}
-
-footer .text-white {
-    color: white !important;
+#uni_id,
+#uni_id option,
+#admin_id,
+#admin_id option {
+    background-color: #fff !important;
+    color: #333 !important;
 }

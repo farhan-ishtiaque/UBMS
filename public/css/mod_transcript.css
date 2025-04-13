@@ -1,0 +1,194 @@
+:root {
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --danger-color: #dc3545;
+    --light-bg: #f8f9fa;
+    --dark-text: #1f2937;
+    --border-color: #e5e7eb;
+}
+
+body {
+    background: linear-gradient(to right, #e0f2fe, #f0fdf4);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: var(--dark-text);
+    padding: 20px 0;
+}
+
+.container {
+    max-width: 1400px;
+    padding: 2rem;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark-text);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 3px;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: none;
+}
+
+.table th {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+.status-badge {
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.status-badge.graduated {
+    background-color: #10B981;
+    color: white;
+}
+
+.status-badge.not-graduated {
+    background-color: #F59E0B;
+    color: white;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    background-color: rgba(67, 97, 238, 0.1);
+    transition: var(--transition);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-button:hover {
+    background-color: rgba(67, 97, 238, 0.2);
+    text-decoration: none;
+    color: var(--secondary-color);
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--border-color);
+}
+
+.transcript-header {
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.semester-section {
+    margin-bottom: 2rem;
+    page-break-inside: avoid;
+}
+
+.semester-section h5 {
+    background-color: var(--light-bg);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .table-responsive {
+        border: none;
+    }
+    
+    .table thead {
+        display: none;
+    }
+    
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+    
+    .table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        width: calc(50% - 1rem);
+        padding-right: 1rem;
+        text-align: left;
+        font-weight: 600;
+        color: var(--dark-text);
+    }
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #transcriptModal, #transcriptModal * {
+        visibility: visible;
+    }
+    #transcriptModal {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+    .modal-footer {
+        display: none;
+    }
+    .modal-header {
+        display: none;
+    }
+    .semester-section {
+        margin-bottom: 1rem;
+    }
+}

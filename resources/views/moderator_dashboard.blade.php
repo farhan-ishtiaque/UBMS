@@ -16,17 +16,17 @@
       <span class="logo-text">UBMS</span>
     </div>
     <ul class="menu">
-      <li class="menu-item"><a href="{{route('universities.accredited')}}" class="menu-link"><i class="fas fa-university"></i>Universities</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-users"></i> Users</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-chalkboard-teacher"></i> Faculties</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-user-graduate"></i>  Students</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-building"></i>  Departments</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-book"></i>  Courses</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-briefcase"></i>  Job Postings</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-user-tie"></i>  Faculty Recruitment</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-trophy"></i>  Rankings</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-chalkboard"></i>  Faculty Development</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-money-check-alt"></i>  University Fundings</a></li>
+      <li class="menu-item"><a href="{{route('mod_uni_menu')}}" class="menu-link"><i class="fas fa-university"></i>Universities</a></li>
+      <li class="menu-item"><a href="{{route('mod_users_menu')}}" class="menu-link"><i class="fas fa-users"></i> Users</a></li>
+      <li class="menu-item"><a href="{{route('mod_faculties_menu')}}" class="menu-link"><i class="fas fa-chalkboard-teacher"></i> Faculties</a></li>
+      <li class="menu-item"><a href="{{route('mod_students_menu')}}" class="menu-link"><i class="fas fa-user-graduate"></i>  Students</a></li>
+      <li class="menu-item"><a href="{{route('mod_departments_menu')}}" class="menu-link"><i class="fas fa-building"></i>  Departments</a></li>
+      <li class="menu-item"><a href="{{route('mod_courses_menu')}}" class="menu-link"><i class="fas fa-book"></i>  Courses</a></li>
+      <li class="menu-item"><a href="{{route('mod_jobposting_menu')}}" class="menu-link"><i class="fas fa-briefcase"></i>  Job Postings</a></li>
+      <li class="menu-item"><a href="{{route('mod_facultyrecruitment_menu')}}" class="menu-link"><i class="fas fa-user-tie"></i>  Faculty Recruitment</a></li>
+      <!--<li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-trophy"></i>  Rankings</a></li> -->
+      <li class="menu-item"><a href="{{route('mod_facultydevelopment_menu')}}" class="menu-link"><i class="fas fa-chalkboard"></i>  Faculty Development</a></li>
+      <!--<li class="menu-item"><a href="{{route('mod_unifunding_menu')}}" class="menu-link"><i class="fas fa-money-check-alt"></i>  University Fundings</a></li>-->
     </ul>
   </aside>
 
@@ -34,10 +34,12 @@
   <main class="main-content">
     <div class="header">
       <h1 class="page-title">Dashboard Overview</h1>
-      <div class="user-profile">
-        <img src="{{ asset('images/Moderator.png') }}" alt="User" class="user-avatar" />
-        <span class="username">Moderator</span>
-      </div>
+      <form action="{{ route('logout') }}" method="POST" class="logout-form">
+        @csrf
+        <button type="submit" class="logout-button">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </form>
     </div>
 
     <div class="card-grid">

@@ -40,16 +40,14 @@ class CoursesController extends Controller
             'course_name' => 'required|string|max:255',
             'dept_id'     => 'required|exists:departments,dept_id',
             'credits'     => 'required|integer|min:1',
-            'semester'    => 'required|string|max:20',
-            'year'        => 'required|integer|min:2000',
+            'course_code'    => 'required|string|max:20',
         ]);
     
         Courses::create([
             'course_name' => $request->course_name,
             'dept_id'     => $request->dept_id,
             'credits'     => $request->credits,
-            'semester'    => $request->semester,
-            'year'        => $request->year,
+            'course_code'     => $request->course_code,
         ]);
     
         return redirect()->route('courses.create')->with('success', 'Course created successfully!');
@@ -65,30 +63,24 @@ class CoursesController extends Controller
         return view('courses.edit', compact('course', 'departments', 'universities', 'selectedUniversityId'));
     }
     public function update(Request $request, $id)
-    {
-        // Validate the request
-        $request->validate([
-            'course_name' => 'required|string|max:255',
-            'credits' => 'required|numeric',
-            'semester' => 'required|string|max:50',
-            'year' => 'required|numeric',
-        ]);
+{
+    // Validate the request
+    $validated = $request->validate([
+        'course_name' => 'required|string|max:255',
+        'dept_id'     => 'required|exists:departments,dept_id',
+        'credits'     => 'required|integer|min:1',
+        'course_code' => 'required|string|max:20',
+    ]);
+
+    // Find the course to update
+    $course = Courses::findOrFail($id);
     
-        // Find the course to update
-        $course = Courses::findOrFail($id);
-    
-        // Update the course with the validated data
-        $course->update([
-            'course_name' => $request->course_name,
-            'credits' => $request->credits,
-            'semester' => $request->semester,
-            'year' => $request->year,
-            // Remove the department and university updates as they are no longer in the form
-        ]);
-    
-        // Redirect back with a success message
-        return redirect()->route('courses.index')->with('success', 'Course updated successfully!');
-    }
+    // Update the course
+    $course->update($validated);
+
+    return redirect()->route('courses.index')
+        ->with('success', 'Course updated successfully!');
+}
     
     public function list(Request $request)
 {
@@ -105,18 +97,18 @@ class CoursesController extends Controller
         'universities' => $universities,
         'departments' => $departments,
         'courses' => $courses,
-        'request' => $request // ← make sure this is passed
+        'request' => $request
     ]);
 }
 
-    // Show the delete confirmation page
+ 
     public function confirmDelete($id)
     {
         $course = Courses::findOrFail($id);
         return view('courses.delete', compact('course'));
     }
 
-    // Handle the actual course deletion
+    
     public function delete($id)
     {
         $course = Courses::findOrFail($id);

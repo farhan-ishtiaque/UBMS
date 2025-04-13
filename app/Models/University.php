@@ -48,4 +48,12 @@ class University extends Model
     {
         return $this->hasMany(Rankings::class, 'uni_id');
     }
+
+
+
+    // Add this scope method
+    public function scopeAccredited($query)
+    {
+        return $query->where('accreditation_status', 'Accredited');
+    }
 }

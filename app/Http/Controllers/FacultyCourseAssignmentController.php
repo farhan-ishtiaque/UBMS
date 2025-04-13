@@ -40,5 +40,4 @@ class FacultyCourseAssignmentController extends Controller
         $faculty->courses()->syncWithoutDetaching($dataToAttach);
 
         return redirect()->back()->with('success', 'Courses assigned successfully!');
-    }
-}
+

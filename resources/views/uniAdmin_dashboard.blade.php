@@ -16,14 +16,14 @@
       <span class="logo-text">UBMS</span>
     </div>
     <ul class="menu">
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-chalkboard-teacher"></i> Faculties</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-user-graduate"></i> Students</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-building"></i> Departments</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-book"></i> Courses</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-briefcase"></i> Job Postings</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-user-tie"></i> Faculty Recruitment</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-chalkboard"></i> Faculty Development</a></li>
-      <li class="menu-item"><a href="#" class="menu-link"><i class="fas fa-money-check-alt"></i> University Fundings</a></li>
+      <li class="menu-item"><a href="{{route('admin.faculties.view')}}" class="menu-link"><i class="fas fa-chalkboard-teacher"></i> Faculties</a></li>
+      <li class="menu-item"><a href="{{route('admin_students_menu')}}" class="menu-link"><i class="fas fa-user-graduate"></i> Students</a></li>
+      <li class="menu-item"><a href="{{route('admin_departments_menu')}}" class="menu-link"><i class="fas fa-building"></i> Departments</a></li>
+      <li class="menu-item"><a href="{{route('admin_courses_menu')}}" class="menu-link"><i class="fas fa-book"></i> Courses</a></li>
+      <li class="menu-item"><a href="{{route('admin_jobposting_menu')}}" class="menu-link"><i class="fas fa-briefcase"></i> Job Postings</a></li>
+      <li class="menu-item"><a href="{{route('admin_facultyrecruitment_menu')}}" class="menu-link"><i class="fas fa-user-tie"></i> Faculty Recruitment</a></li>
+      <li class="menu-item"><a href="{{route('admin_facultydevelopment_menu')}}" class="menu-link"><i class="fas fa-chalkboard"></i> Faculty Development</a></li>
+      <li class="menu-item"><a href="{{route('admin_unifunding_menu')}}" class="menu-link"><i class="fas fa-money-check-alt"></i> University Fundings</a></li>
     </ul>
   </aside>
 
@@ -31,10 +31,13 @@
   <main class="main-content">
     <div class="header">
       <h1 class="page-title">Dashboard Overview</h1>
-      <div class="user-profile">
-        <img src="{{ asset('images/Moderator.png') }}" alt="User" class="user-avatar" />
-        <span class="username">Moderator</span>
-      </div>
+      <form action="{{ route('logout') }}" method="POST" class="logout-form">
+        @csrf
+        <button type="submit" class="logout-button">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </form>
+    
     </div>
 
     <div class="card-grid">
@@ -44,7 +47,7 @@
           <div class="card-icon"><i class="fas fa-building"></i></div>
           <h3 class="card-title">Total Departments</h3>
         </div>
-        <div class="card-value" id="total-departments">Loading...</div>
+        <div class="card-value" id="total-departments">{{$departments->count()}}</div>
       </div>
 
       <!-- Faculties Card -->
@@ -101,18 +104,11 @@
         <div class="card-value" id="faculty-recruitment">Loading...</div>
       </div>
 
-      <!-- University Fundings Card -->
-      <div class="card card-8">
-        <div class="card-header">
-          <div class="card-icon"><i class="fas fa-money-check-alt"></i></div>
-          <h3 class="card-title">University Fundings</h3>
-        </div>
-        <div class="card-value" id="university-fundings">Loading...</div>
-      </div>
+      
     </div>
   </main>
   
   <!-- Link to external JavaScript -->
-  <script src="{{ asset('js/dashboard.js') }}"></script>
+  <script src="{{ asset('js/admin_dashboard.js') }}"></script>
 </body>
 </html>

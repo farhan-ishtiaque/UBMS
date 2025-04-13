@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <a href="{{ route('mod_jobposting_menu')}}" class="back-button">
+        <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+    </a>
+
     <title>All Job Postings</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -17,6 +22,28 @@
             margin: 0 auto;
         }
 
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            background-color: rgba(67, 97, 238, 0.1);
+            transition: var(--transition);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-button:hover {
+            background-color: rgba(67, 97, 238, 0.2);
+            text-decoration: none;
+            color: var(--secondary-color);
+            transform: translateY(-1px);
+        }
+
+
         h1 {
             text-align: center;
             font-size: 32px;
@@ -29,12 +56,13 @@
             width: 100%;
             border-collapse: collapse;
             background-color: #fff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             border-radius: 12px;
             overflow: hidden;
         }
 
-        .job-table th, .job-table td {
+        .job-table th,
+        .job-table td {
             padding: 16px 20px;
             text-align: left;
         }
@@ -59,7 +87,7 @@
             padding: 40px;
             background: white;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .apply-button {
@@ -75,6 +103,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>All Job Postings</h1>
@@ -111,8 +140,9 @@
                         </tr>
                     @endforeach
                 </tbody>
-            </table> 
+            </table>
         @endif
     </div>
 </body>
+
 </html>

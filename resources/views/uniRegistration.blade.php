@@ -9,6 +9,10 @@
 </head>
 <body>
     <div class="container mt-5">
+        <a href="{{ route('mod_uni_menu')}}" class="back-button">
+            <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+        </a>
+
         <h1 class="text-center mb-4">University Registration Form</h1>
 
         @if (session('success'))

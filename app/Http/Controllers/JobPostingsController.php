@@ -69,11 +69,14 @@ public function index2(Request $request)
     return view('job_postings.index2', compact('jobPostings'));
 }
 
+
 public function showApplicants($jobId)
 {
     // Get the applicants for a specific job posting
     $applicants = FacultyRecruitment::where('job_id', $jobId)->get();
 
     return view('job_postings.applicants', compact('applicants', 'jobId'));
+}
+
 }
 }

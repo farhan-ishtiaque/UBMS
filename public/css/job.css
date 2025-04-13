@@ -57,6 +57,28 @@
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
+  .back-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    color:#f1f5f9;
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    color: var(--secondary-color);
+    transform: translateY(-1px);
+}
+
+
   .form-card {
     background-color: white;
     border-radius: var(--border-radius);

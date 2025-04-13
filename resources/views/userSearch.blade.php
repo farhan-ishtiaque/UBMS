@@ -41,7 +41,7 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->PhoneNumber }}</td>
                     <td>
-                        <a href="{{ route('user.edit', $user->id) }}">Edit</a>
+                        <a href="{{ route('user.edit', $user->user_id) }}">Edit</a>
                     </td>
                 </tr>
             @endforeach

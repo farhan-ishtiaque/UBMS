@@ -19,17 +19,18 @@ return new class extends Migration
             $table->string('PhoneNumber');
             $table->string('email')->unique();
             $table->string('password');
-            
+
+            $table->unsignedBigInteger('uni_id')->nullable();
+
             // Role system (ENUM for simplicity)
             $table->enum('type', ['umsb_personnel', 'university_admin','moderators'])
                   ->default('umsb_personnel');
             
-            /*// Nullable foreign key since not all users belong to universities
-            $table->foreignId('university_id')
-                  ->nullable()
-                  ->constrained()
-                  ->onDelete('set null');
-            */
+
+            // Nullable foreign key since not all users belong to universities
+            
+            $table->foreign('uni_id')->references('uni_id')->on('universities')->onDelete('set null');
+
             $table->timestamps();
         });
     }

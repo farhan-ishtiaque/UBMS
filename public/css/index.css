@@ -17,6 +17,27 @@
     background-color: #f2f2f2;
 }
 
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    background-color: rgba(67, 97, 238, 0.1);
+    transition: var(--transition);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-button:hover {
+    background-color: rgba(67, 97, 238, 0.2);
+    text-decoration: none;
+    color: var(--secondary-color);
+    transform: translateY(-1px);
+}
+
 /* Button Styling */
 .btn-primary, .btn-danger {
     font-size: 16px;

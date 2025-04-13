@@ -3,31 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ asset('css/edit.css') }}" rel="stylesheet">
-    <title>Edit User</title>
+    <title>Edit Faculty</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            background-color: #fff;
+        }
+        .back-btn {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Edit User: {{ $user->FirstName }} {{ $user->LastName }}</h1>
+    <div class="container">
+        <div class="back-btn">
+            <a href="{{ route('mod_users_menu') }}" class="btn btn-secondary">
+                ← Back to Menu
+            </a>
+        </div>
 
-    <!-- Edit User Form -->
-    <form action="{{ route('user.update', $user->id) }}" method="POST">
-        @csrf
-        @method('PUT')
+        <div class="form-container">
+            <h2 class="text-center mb-4">Edit Faculty Information</h2>
 
-        <label for="FirstName">First Name</label>
-        <input type="text" name="FirstName" id="FirstName" value="{{ $user->FirstName }}" required><br><br>
+            <form method="POST" action="{{ route('faculties.update', $faculty->faculty_id) }}">
+                @csrf
+                @method('PUT')
 
-        <label for="LastName">Last Name</label>
-        <input type="text" name="LastName" id="LastName" value="{{ $user->LastName }}" required><br><br>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name" 
+                               value="{{ $faculty->first_name }}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" 
+                               value="{{ $faculty->last_name }}" required>
+                    </div>
+                </div>
 
-        <label for="PhoneNumber">Phone Number</label>
-        <input type="text" name="PhoneNumber" id="PhoneNumber" value="{{ $user->PhoneNumber }}" required><br><br>
+                <div class="mb-3">
+                    <label for="designation" class="form-label">Designation</label>
+                    <input type="text" class="form-control" id="designation" name="designation" 
+                           value="{{ $faculty->designation }}" required>
+                </div>
 
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" value="{{ $user->email }}" required><br><br>
+                <div class="mb-3">
+                    <label for="qualification" class="form-label">Qualification</label>
+                    <input type="text" class="form-control" id="qualification" name="qualification" 
+                           value="{{ $faculty->qualification }}" required>
+                </div>
 
-        <button type="submit">Update User</button>
-    </form>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Update Faculty</button>
+                </div>
+            </form>
 
+            @if(session('status'))
+                <div class="alert alert-success mt-3">
+                    {{ session('status') }}
+                </div>
+            @endif
+        </div>
+    </div>
 </body>
 </html>

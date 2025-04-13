@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id('course_id');
             $table->unsignedBigInteger('dept_id');
             $table->string('course_name');
-            $table->string('semester');
-            $table->string('year');
+            $table->string('course_code');
             $table->integer('credits');
             $table->timestamps();
         
